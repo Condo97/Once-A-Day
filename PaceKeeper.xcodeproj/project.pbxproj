@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0EAF6920DA45FD003040BC /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0EAF6820DA45FD003040BC /* ScheduleTableViewController.m */; };
+		BB0EAF6D20DA461F003040BC /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0EAF6C20DA461F003040BC /* ScheduleTableViewCell.m */; };
+		BB1A7EBA20DA7DF600843458 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */; };
 		BBECDDEA20D6F78B00458146 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDDE920D6F78B00458146 /* AppDelegate.m */; };
-		BBECDDED20D6F78B00458146 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDDEC20D6F78B00458146 /* ViewController.m */; };
 		BBECDDF020D6F78B00458146 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBECDDEE20D6F78B00458146 /* Main.storyboard */; };
 		BBECDDF320D6F78B00458146 /* PaceKeeper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBECDDF120D6F78B00458146 /* PaceKeeper.xcdatamodeld */; };
 		BBECDDF520D6F78E00458146 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBECDDF420D6F78E00458146 /* Assets.xcassets */; };
@@ -16,6 +18,15 @@
 		BBECDDFB20D6F78E00458146 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDDFA20D6F78E00458146 /* main.m */; };
 		BBECDE0520D6F78E00458146 /* PaceKeeperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE0420D6F78E00458146 /* PaceKeeperTests.m */; };
 		BBECDE1020D6F78E00458146 /* PaceKeeperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE0F20D6F78E00458146 /* PaceKeeperUITests.m */; };
+		BBECDE2720D7984800458146 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE2020D7984800458146 /* RoundedButton.m */; };
+		BBECDE2820D7984800458146 /* RoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE2220D7984800458146 /* RoundedView.m */; };
+		BBECDE2920D7984800458146 /* RoundedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE2520D7984800458146 /* RoundedTextField.m */; };
+		BBECDE2C20D7F42900458146 /* TodayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE2B20D7F42900458146 /* TodayTableViewController.m */; };
+		BBECDE2F20D7F45100458146 /* TodayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE2E20D7F45100458146 /* TodayTableViewCell.m */; };
+		BBECDE3620D7F61300458146 /* CDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE3420D7F61300458146 /* CDManager.m */; };
+		BBECDE3920D7F76900458146 /* ExerciseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE3820D7F76900458146 /* ExerciseObject.m */; };
+		BBECDE3C20D8398000458146 /* AddExercise.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBECDE3B20D8398000458146 /* AddExercise.xib */; };
+		BBECDE3F20D8E1E400458146 /* AddExerciseView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE3E20D8E1E400458146 /* AddExerciseView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +47,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB0EAF6720DA45FD003040BC /* ScheduleTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewController.h; sourceTree = "<group>"; };
+		BB0EAF6820DA45FD003040BC /* ScheduleTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewController.m; sourceTree = "<group>"; };
+		BB0EAF6B20DA461F003040BC /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
+		BB0EAF6C20DA461F003040BC /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
+		BB1A7EB820DA7DF600843458 /* HistoryTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
+		BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
+		BB790D7920D8F88900890E60 /* Defines.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.pch; sourceTree = "<group>"; };
 		BBECDDE520D6F78B00458146 /* PaceKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaceKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBECDDE820D6F78B00458146 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BBECDDE920D6F78B00458146 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BBECDDEB20D6F78B00458146 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BBECDDEC20D6F78B00458146 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BBECDDEF20D6F78B00458146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BBECDDF220D6F78B00458146 /* PaceKeeper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PaceKeeper.xcdatamodel; sourceTree = "<group>"; };
 		BBECDDF420D6F78E00458146 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +69,23 @@
 		BBECDE0B20D6F78E00458146 /* PaceKeeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaceKeeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBECDE0F20D6F78E00458146 /* PaceKeeperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaceKeeperUITests.m; sourceTree = "<group>"; };
 		BBECDE1120D6F78E00458146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBECDE1F20D7984800458146 /* RoundedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedView.h; sourceTree = "<group>"; };
+		BBECDE2020D7984800458146 /* RoundedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
+		BBECDE2120D7984800458146 /* RoundedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedTextField.h; sourceTree = "<group>"; };
+		BBECDE2220D7984800458146 /* RoundedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedView.m; sourceTree = "<group>"; };
+		BBECDE2420D7984800458146 /* RoundedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedButton.h; sourceTree = "<group>"; };
+		BBECDE2520D7984800458146 /* RoundedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedTextField.m; sourceTree = "<group>"; };
+		BBECDE2A20D7F42900458146 /* TodayTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayTableViewController.h; sourceTree = "<group>"; };
+		BBECDE2B20D7F42900458146 /* TodayTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayTableViewController.m; sourceTree = "<group>"; };
+		BBECDE2D20D7F45100458146 /* TodayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayTableViewCell.h; sourceTree = "<group>"; };
+		BBECDE2E20D7F45100458146 /* TodayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayTableViewCell.m; sourceTree = "<group>"; };
+		BBECDE3220D7F61300458146 /* CDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDManager.h; sourceTree = "<group>"; };
+		BBECDE3420D7F61300458146 /* CDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDManager.m; sourceTree = "<group>"; };
+		BBECDE3720D7F76900458146 /* ExerciseObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExerciseObject.h; sourceTree = "<group>"; };
+		BBECDE3820D7F76900458146 /* ExerciseObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExerciseObject.m; sourceTree = "<group>"; };
+		BBECDE3B20D8398000458146 /* AddExercise.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddExercise.xib; sourceTree = "<group>"; };
+		BBECDE3D20D8E1E400458146 /* AddExerciseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddExerciseView.h; sourceTree = "<group>"; };
+		BBECDE3E20D8E1E400458146 /* AddExerciseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddExerciseView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +113,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB0EAF6A20DA460F003040BC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BBECDE2D20D7F45100458146 /* TodayTableViewCell.h */,
+				BBECDE2E20D7F45100458146 /* TodayTableViewCell.m */,
+				BB0EAF6B20DA461F003040BC /* ScheduleTableViewCell.h */,
+				BB0EAF6C20DA461F003040BC /* ScheduleTableViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		BBECDDDC20D6F78B00458146 = {
 			isa = PBXGroup;
 			children = (
@@ -105,13 +149,23 @@
 			children = (
 				BBECDDE820D6F78B00458146 /* AppDelegate.h */,
 				BBECDDE920D6F78B00458146 /* AppDelegate.m */,
-				BBECDDEB20D6F78B00458146 /* ViewController.h */,
-				BBECDDEC20D6F78B00458146 /* ViewController.m */,
+				BBECDE2A20D7F42900458146 /* TodayTableViewController.h */,
+				BBECDE2B20D7F42900458146 /* TodayTableViewController.m */,
+				BB0EAF6720DA45FD003040BC /* ScheduleTableViewController.h */,
+				BB0EAF6820DA45FD003040BC /* ScheduleTableViewController.m */,
+				BB1A7EB820DA7DF600843458 /* HistoryTableViewController.h */,
+				BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */,
+				BB0EAF6A20DA460F003040BC /* Cells */,
+				BBECDE3A20D7F76F00458146 /* Custom Objects */,
+				BBECDE3020D7F61300458146 /* Managers */,
+				BBECDE1D20D7984800458146 /* Custom Views */,
+				BBECDE4020D8E2C600458146 /* Nibs */,
 				BBECDDEE20D6F78B00458146 /* Main.storyboard */,
 				BBECDDF420D6F78E00458146 /* Assets.xcassets */,
 				BBECDDF620D6F78E00458146 /* LaunchScreen.storyboard */,
 				BBECDDF920D6F78E00458146 /* Info.plist */,
 				BBECDDFA20D6F78E00458146 /* main.m */,
+				BB790D7920D8F88900890E60 /* Defines.pch */,
 				BBECDDF120D6F78B00458146 /* PaceKeeper.xcdatamodeld */,
 			);
 			path = PaceKeeper;
@@ -133,6 +187,47 @@
 				BBECDE1120D6F78E00458146 /* Info.plist */,
 			);
 			path = PaceKeeperUITests;
+			sourceTree = "<group>";
+		};
+		BBECDE1D20D7984800458146 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				BBECDE1F20D7984800458146 /* RoundedView.h */,
+				BBECDE2220D7984800458146 /* RoundedView.m */,
+				BBECDE2120D7984800458146 /* RoundedTextField.h */,
+				BBECDE2520D7984800458146 /* RoundedTextField.m */,
+				BBECDE2420D7984800458146 /* RoundedButton.h */,
+				BBECDE2020D7984800458146 /* RoundedButton.m */,
+				BBECDE3D20D8E1E400458146 /* AddExerciseView.h */,
+				BBECDE3E20D8E1E400458146 /* AddExerciseView.m */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		BBECDE3020D7F61300458146 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BBECDE3220D7F61300458146 /* CDManager.h */,
+				BBECDE3420D7F61300458146 /* CDManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		BBECDE3A20D7F76F00458146 /* Custom Objects */ = {
+			isa = PBXGroup;
+			children = (
+				BBECDE3720D7F76900458146 /* ExerciseObject.h */,
+				BBECDE3820D7F76900458146 /* ExerciseObject.m */,
+			);
+			path = "Custom Objects";
+			sourceTree = "<group>";
+		};
+		BBECDE4020D8E2C600458146 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				BBECDE3B20D8398000458146 /* AddExercise.xib */,
+			);
+			path = Nibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBECDDF820D6F78E00458146 /* LaunchScreen.storyboard in Resources */,
+				BBECDE3C20D8398000458146 /* AddExercise.xib in Resources */,
 				BBECDDF520D6F78E00458146 /* Assets.xcassets in Resources */,
 				BBECDDF020D6F78B00458146 /* Main.storyboard in Resources */,
 			);
@@ -265,10 +361,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBECDDED20D6F78B00458146 /* ViewController.m in Sources */,
+				BBECDE3920D7F76900458146 /* ExerciseObject.m in Sources */,
+				BBECDE2F20D7F45100458146 /* TodayTableViewCell.m in Sources */,
+				BB1A7EBA20DA7DF600843458 /* HistoryTableViewController.m in Sources */,
 				BBECDDEA20D6F78B00458146 /* AppDelegate.m in Sources */,
+				BBECDE2820D7984800458146 /* RoundedView.m in Sources */,
 				BBECDDFB20D6F78E00458146 /* main.m in Sources */,
+				BBECDE3620D7F61300458146 /* CDManager.m in Sources */,
 				BBECDDF320D6F78B00458146 /* PaceKeeper.xcdatamodeld in Sources */,
+				BBECDE2C20D7F42900458146 /* TodayTableViewController.m in Sources */,
+				BB0EAF6D20DA461F003040BC /* ScheduleTableViewCell.m in Sources */,
+				BB0EAF6920DA45FD003040BC /* ScheduleTableViewController.m in Sources */,
+				BBECDE2720D7984800458146 /* RoundedButton.m in Sources */,
+				BBECDE2920D7984800458146 /* RoundedTextField.m in Sources */,
+				BBECDE3F20D8E1E400458146 /* AddExerciseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,13 +546,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				INFOPLIST_FILE = PaceKeeper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.PaceKeeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -457,13 +564,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				INFOPLIST_FILE = PaceKeeper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.PaceKeeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

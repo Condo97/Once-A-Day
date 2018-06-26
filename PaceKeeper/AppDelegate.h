@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "Defines.pch"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
