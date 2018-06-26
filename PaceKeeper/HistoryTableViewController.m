@@ -22,7 +22,8 @@
     
     [self setTitle:self.exerciseName];
     
-    self.exercises = [[CDManager sharedManager] getPastExercises:self.exerciseName];
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+    self.exercises = [[[CDManager sharedManager] getPastExercises:self.exerciseName] sortedArrayUsingDescriptors:@[descriptor]];
 }
 
 - (void)didReceiveMemoryWarning {
