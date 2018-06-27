@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <StoreKit/StoreKit.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    int r = arc4random_uniform(7);
+    if(r == 5)
+        [SKStoreReviewController requestReview];
+    
     return YES;
 }
 
