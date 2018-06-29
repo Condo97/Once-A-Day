@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <StoreKit/StoreKit.h>
+#import "NetworkManager.h"
+#import "KFKeychain.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +20,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center setDelegate:self];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL success, NSError *error) {
+        if(!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            });
+        }
+    }];
+    
     
     int r = arc4random_uniform(7);
     if(r == 5)
@@ -48,6 +61,16 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Do nothing?
+    NSLog(@"Remote Notification Error:\n%@", error);
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    //Save deviceToken to Keychain
+    
+    [KFKeychain saveObject:deviceToken forKey:@"DeviceToken"];
+}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

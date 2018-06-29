@@ -131,7 +131,7 @@
     if([segue.identifier isEqualToString:@"toHistory"]) {
         NSIndexPath *ip = (NSIndexPath *)sender;
         HistoryTableViewController *hvc = (HistoryTableViewController *)segue.destinationViewController;
-        [hvc setExerciseName:self.exercises[ip.row].name];
+        [hvc setCurrentExercise:self.exercises[ip.row]];
     }
 }
 
@@ -181,34 +181,6 @@
         [ac addAction:[UIAlertAction actionWithTitle:@"No Way" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:ac animated:YES completion:nil];
     }];
-    
-//    BOOL isToday = NO;
-//    for(ExerciseObject *e in self.todaysExercises) {
-//        if([e.name isEqualToString:self.exercises[indexPath.row].name]) {
-//            isToday = YES;
-//        }
-//    }
-//
-//    if(!isToday) {
-//        UITableViewRowAction *doToday = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Do Today" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-//            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Do Today?" message:@"If you confirm, you MUST to do it today ;)" preferredStyle:UIAlertControllerStyleAlert];
-//            [ac addAction:[UIAlertAction actionWithTitle:@"Wimp Out" style:UIAlertActionStyleCancel handler:nil]];
-//            [ac addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                ExerciseObject *e = self.exercises[indexPath.row];
-//                ExerciseObject *temp = [[ExerciseObject alloc] initWithName:e.name goal:e.goal completed:0 increment:e.increment period:e.period identifier:e.identifier + 1 date:[NSDate date]];
-//                [[CDManager sharedManager] saveExercise:temp];
-//
-//                //Change the colors and stuff
-//                self.todaysExercises = [[CDManager sharedManager] getTodaysExercises];
-//                [self.tableView reloadData];
-//            }]];
-//            [self presentViewController:ac animated:YES completion:nil];
-//        }];
-//
-//        [doToday setBackgroundColor:GREEN];
-//
-//        return @[delete, doToday];
-//    }
     
     return @[delete];
 }

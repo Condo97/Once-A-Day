@@ -11,6 +11,6 @@
 
 @interface HistoryTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSString *exerciseName;
+@property (strong, nonatomic) ExerciseObject *currentExercise;
 
 @end

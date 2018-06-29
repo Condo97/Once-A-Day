@@ -88,7 +88,6 @@
 - (void)loadAndUpdate {
     NSArray<ExerciseObject *> *allTodaysExercises = [[CDManager sharedManager] getTodaysExercises];
     NSArray<ExerciseObject *> *allAddedExercises = [[CDManager sharedManager] getAddedExercises];
-    NSArray<ExerciseObject *> *allPushups = [[CDManager sharedManager] getPastExercises:@"Pushups"];
     
     for(ExerciseObject *te in allTodaysExercises) {
         BOOL contained = NO;

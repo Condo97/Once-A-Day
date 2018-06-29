@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -402,7 +403,7 @@ You don't want it enough."</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.2901960784" green="0.5450980392" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="Lg7-kA-2LY" detailTextLabel="kRd-el-uLr" style="IBUITableViewCellStyleValue1" id="YlC-oF-1qV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" textLabel="Lg7-kA-2LY" detailTextLabel="kRd-el-uLr" style="IBUITableViewCellStyleValue1" id="YlC-oF-1qV">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YlC-oF-1qV" id="7S1-tY-Eib">
@@ -425,6 +426,35 @@ You don't want it enough."</string>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="notificationCell" id="jhW-HK-ZEI" customClass="NotificationTableViewCell">
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jhW-HK-ZEI" id="wIz-8u-2Aq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJm-hH-QNz">
+                                            <rect key="frame" x="16" y="11" width="96.5" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iip-fX-gAG">
+                                            <rect key="frame" x="310" y="6" width="51" height="31"/>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZJm-hH-QNz" firstAttribute="top" secondItem="wIz-8u-2Aq" secondAttribute="topMargin" id="83F-Jl-i8m"/>
+                                        <constraint firstAttribute="trailing" secondItem="Iip-fX-gAG" secondAttribute="trailing" constant="16" id="8ze-vU-aed"/>
+                                        <constraint firstItem="Iip-fX-gAG" firstAttribute="centerY" secondItem="wIz-8u-2Aq" secondAttribute="centerY" id="Kg9-xA-y6c"/>
+                                        <constraint firstItem="ZJm-hH-QNz" firstAttribute="leading" secondItem="wIz-8u-2Aq" secondAttribute="leadingMargin" id="TVX-pQ-d3f"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="ZJm-hH-QNz" secondAttribute="bottom" id="pwd-JK-jrR"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="notificationSwitch" destination="Iip-fX-gAG" id="goZ-Co-vTJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
