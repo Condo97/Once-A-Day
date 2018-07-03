@@ -59,7 +59,7 @@
                                                  increment:((NSNumber *)[object valueForKey:@"increment"]).intValue
                                                     period:((NSNumber *)[object valueForKey:@"period"]).intValue
                                                 identifier:((NSNumber *)[object valueForKey:@"id"]).intValue
-                                                      date:[object valueForKey:@"date"]];
+                                                      date:[object valueForKey:@"date"] notificationsEnabled:((NSNumber *)[object valueForKey:@"notificationsEnabled"]).boolValue notificationHour:((NSNumber *)[object valueForKey:@"notificationHour"]).intValue];
             }
         }
     }
@@ -102,7 +102,7 @@
                                                              increment:((NSNumber *)[object valueForKey:@"increment"]).intValue
                                                                 period:((NSNumber *)[object valueForKey:@"period"]).intValue
                                                             identifier:((NSNumber *)[object valueForKey:@"id"]).intValue
-                                                                  date:[object valueForKey:@"date"]];
+                                                                  date:[object valueForKey:@"date"] notificationsEnabled:((NSNumber *)[object valueForKey:@"notificationsEnabled"]).boolValue notificationHour:((NSNumber *)[object valueForKey:@"notificationHour"]).intValue];
             [exercises addObject:obj];
         }
     }
@@ -229,6 +229,8 @@
     [managedObject setValue:[NSNumber numberWithInt:exercise.period] forKey:@"period"];
     [managedObject setValue:[NSNumber numberWithInt:exercise.identifier] forKey:@"id"];
     [managedObject setValue:exercise.date forKey:@"date"];
+    [managedObject setValue:[NSNumber numberWithBool:exercise.notificationsEnabled] forKey:@"notificationsEnabled"];
+    [managedObject setValue:[NSNumber numberWithInt:exercise.notificationHour] forKey:@"notificationHour"];
     
     NSError *error;
     [context save:&error];
@@ -301,6 +303,8 @@
             [object setValue:[NSNumber numberWithInt:exercise.period] forKey:@"period"];
             [object setValue:[NSNumber numberWithInt:exercise.identifier] forKey:@"id"];
             [object setValue:exercise.date forKey:@"date"];
+            [object setValue:[NSNumber numberWithBool:exercise.notificationsEnabled] forKey:@"notificationsEnabled"];
+            [object setValue:[NSNumber numberWithInt:exercise.notificationHour] forKey:@"notificationHour"];
             
             
         }
@@ -363,6 +367,44 @@
     }
     
     return exists;
+}
+
+- (void)updateNotificationsEnabled:(ExerciseObject *)exercise enabled:(BOOL)enabled {
+    NSManagedObjectContext *context = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).persistentContainer.viewContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Exercise"];
+    NSError *error;
+    NSArray *managedObjects = [context executeFetchRequest:request error:&error];
+    
+    ExerciseObject *tempExercise = [self getMostRecentExercise:exercise.name];
+    
+    for(NSManagedObject *object in managedObjects) {
+        if([exercise.name isEqualToString:[object valueForKey:@"name"]] && [[object valueForKey:@"date"] isEqualToDate:tempExercise.date]) {
+            [object setValue:[NSNumber numberWithBool:enabled] forKey:@"notificationsEnabled"];
+        }
+    }
+    
+    NSError *error2;
+    [context save:&error2];
+}
+
+- (void)updateNotificationHour:(ExerciseObject *)exercise hour:(int)hour {
+    NSManagedObjectContext *context = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).persistentContainer.viewContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Exercise"];
+    NSError *error;
+    NSArray *managedObjects = [context executeFetchRequest:request error:&error];
+    
+    ExerciseObject *tempExercise = [self getMostRecentExercise:exercise.name];
+    
+    for(NSManagedObject *object in managedObjects) {
+        if([exercise.name isEqualToString:[object valueForKey:@"name"]] && [[object valueForKey:@"date"] isEqualToDate:tempExercise.date]) {
+            [object setValue:[NSNumber numberWithInt:hour] forKey:@"notificationHour"];
+        }
+    }
+    
+    NSError *error2;
+    [context save:&error2];
 }
 
 @end

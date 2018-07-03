@@ -97,7 +97,7 @@
         }
         
         if(!contained) {
-            ExerciseObject *recent = [[CDManager sharedManager] getMostRecentExercise:te.name];
+            //ExerciseObject *recent = [[CDManager sharedManager] getMostRecentExercise:te.name];
             
             int newGoal = te.goal;
             if(te.goal == te.completed)
@@ -105,7 +105,7 @@
             else if(te.completed > te.goal)
                 newGoal = te.completed;
             
-            ExerciseObject *temp = [[ExerciseObject alloc] initWithName:te.name goal:newGoal completed:0 increment:te.increment period:te.period identifier:te.identifier + 1 date:[NSDate date]];
+            ExerciseObject *temp = [[ExerciseObject alloc] initWithName:te.name goal:newGoal completed:0 increment:te.increment period:te.period identifier:te.identifier + 1 date:[NSDate date] notificationsEnabled:te.notificationsEnabled notificationHour:te.notificationHour];
             [[CDManager sharedManager] saveExercise:temp];
         }
     }

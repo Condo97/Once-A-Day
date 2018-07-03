@@ -9,6 +9,8 @@
 #import "ScheduleTableViewController.h"
 #import "ScheduleTableViewCell.h"
 #import "HistoryTableViewController.h"
+#import "NetworkManager.h"
+#import "KFKeychain.h"
 
 @interface ScheduleTableViewController ()
 
@@ -92,29 +94,6 @@
         
         [cell.editLeadingConstraint setConstant:0.0];
     }
-//
-//    if(isToday) {
-//        [cell.doTodayText setTextColor:[UIColor lightTextColor]];
-//        [cell.doTodayBackground setBackgroundColor:GREEN];
-//        UIButton *button = [[UIButton alloc] initWithFrame:cell.doTodayBackground.bounds];
-//        [button setTag:indexPath.row];
-//        [button addTarget:self action:@selector(tappedDoTodayRedundant:) forControlEvents:UIControlEventTouchDown];
-//        [cell.doTodayBackground addSubview:button];
-//
-//    } else {
-//        [cell.doTodayText setTextColor:GREEN];
-//        [cell.doTodayBackground setBackgroundColor:[UIColor whiteColor]];
-//
-//        UIButton *button = [[UIButton alloc] initWithFrame:cell.doTodayBackground.bounds];
-//        [button setTag:indexPath.row];
-//        [button addTarget:self action:@selector(tappedDoToday:) forControlEvents:UIControlEventTouchDown];
-//        [cell.doTodayBackground addSubview:button];
-//    }
-    
-//    if(self.isEditing)
-//       [cell.editLeadingConstraint setConstant:0];
-//    else
-//        [cell.editLeadingConstraint setConstant:-75];
     
     return cell;
 }
@@ -149,12 +128,14 @@
             [ac addAction:[UIAlertAction actionWithTitle:@"Wimp Out" style:UIAlertActionStyleCancel handler:nil]];
             [ac addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 ExerciseObject *e = self.exercises[indexPath.row];
-                ExerciseObject *temp = [[ExerciseObject alloc] initWithName:e.name goal:e.goal completed:0 increment:e.increment period:e.period identifier:e.identifier + 1 date:[NSDate date]];
+                ExerciseObject *temp = [[ExerciseObject alloc] initWithName:e.name goal:e.goal completed:0 increment:e.increment period:e.period identifier:e.identifier + 1 date:[NSDate date] notificationsEnabled:e.notificationsEnabled notificationHour:e.notificationHour];
                 [[CDManager sharedManager] saveExercise:temp];
                 
                 //Change the colors and stuff
                 self.todaysExercises = [[CDManager sharedManager] getTodaysExercises];
                 [self.tableView reloadData];
+                
+                [[NetworkManager sharedManager] setToday:[KFKeychain loadObjectForKey:@"DeviceToken"] exerciseName:temp.name];
             }]];
             [self presentViewController:ac animated:YES completion:nil];
         }];
@@ -171,6 +152,8 @@
     UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Delete?" message:@"Are you sure you want to delete this exercise? You will lose all historical data!" preferredStyle:UIAlertControllerStyleAlert];
         [ac addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [[NetworkManager sharedManager] deleteNotifications:[KFKeychain loadObjectForKey:@"DeviceToken"] exerciseName:self.exercises[indexPath.row].name];
+            
             [self.tableView beginUpdates];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
             [[CDManager sharedManager] deleteAllExercisesNamed:self.exercises[indexPath.row].name];

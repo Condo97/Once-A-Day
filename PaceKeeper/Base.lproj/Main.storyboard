@@ -47,7 +47,7 @@ You don't want it enough."</string>
                             <nil key="highlightedColor"/>
                         </label>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseCell" rowHeight="75" id="NB0-Qo-tIC" customClass="TodayTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="exerciseCell" rowHeight="75" id="NB0-Qo-tIC" customClass="TodayTableViewCell">
                                 <rect key="frame" x="0.0" y="176.5" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NB0-Qo-tIC" id="ru7-2V-6Pk">
@@ -456,6 +456,46 @@ You don't want it enough."</string>
                                     <outlet property="notificationSwitch" destination="Iip-fX-gAG" id="goZ-Co-vTJ"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="notificationCellTime" id="BKz-Bo-ZUy" customClass="NotificationTableViewCell">
+                                <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BKz-Bo-ZUy" id="IsZ-VY-FbI">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily at" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDL-Qr-svH">
+                                            <rect key="frame" x="16" y="11" width="226" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10:00 am" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KdI-oO-iVU">
+                                            <rect key="frame" x="262" y="7" width="97" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="97" id="ZIJ-qd-aEN"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hDL-Qr-svH" secondAttribute="bottom" id="10g-c8-dVA"/>
+                                        <constraint firstItem="hDL-Qr-svH" firstAttribute="leading" secondItem="IsZ-VY-FbI" secondAttribute="leadingMargin" id="LLf-kJ-SzJ"/>
+                                        <constraint firstItem="KdI-oO-iVU" firstAttribute="centerY" secondItem="IsZ-VY-FbI" secondAttribute="centerY" id="Mtk-6C-18l"/>
+                                        <constraint firstItem="KdI-oO-iVU" firstAttribute="leading" secondItem="hDL-Qr-svH" secondAttribute="trailing" constant="20" id="Srl-dU-E5s"/>
+                                        <constraint firstAttribute="trailing" secondItem="KdI-oO-iVU" secondAttribute="trailing" constant="16" id="Ss6-Sf-t1s"/>
+                                        <constraint firstItem="hDL-Qr-svH" firstAttribute="bottom" secondItem="IsZ-VY-FbI" secondAttribute="bottomMargin" id="YN0-fm-4bx"/>
+                                        <constraint firstItem="hDL-Qr-svH" firstAttribute="leading" secondItem="IsZ-VY-FbI" secondAttribute="leadingMargin" id="ZYV-1U-Syw"/>
+                                        <constraint firstItem="hDL-Qr-svH" firstAttribute="top" secondItem="IsZ-VY-FbI" secondAttribute="topMargin" id="hxo-9N-FMm"/>
+                                        <constraint firstItem="hDL-Qr-svH" firstAttribute="top" secondItem="IsZ-VY-FbI" secondAttribute="topMargin" id="iHr-km-g8W"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="timeLabel" destination="hDL-Qr-svH" id="RgU-qq-jcD"/>
+                                    <outlet property="timePlaceholder" destination="KdI-oO-iVU" id="pqJ-ax-xCJ"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="0pM-Ux-20m" id="9ai-vP-2Dv"/>
@@ -466,7 +506,7 @@ You don't want it enough."</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wp6-SC-vUF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2062" y="573"/>
+            <point key="canvasLocation" x="2061.5999999999999" y="572.56371814092961"/>
         </scene>
     </scenes>
     <resources>

@@ -11,5 +11,7 @@
 @interface NotificationTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UITextField *timePlaceholder;
 
 @end

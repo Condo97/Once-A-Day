@@ -56,6 +56,7 @@
 		BB0EAF6C20DA461F003040BC /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
 		BB1A7EB820DA7DF600843458 /* HistoryTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
 		BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
+		BB26A9A020EC0C7A0045FBAB /* PaceKeeper v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PaceKeeper v2.xcdatamodel"; sourceTree = "<group>"; };
 		BB4B981A20E6166E0090C82D /* KFKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFKeychain.m; sourceTree = "<group>"; };
 		BB4B981B20E6166E0090C82D /* KFKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFKeychain.h; sourceTree = "<group>"; };
 		BB4B981D20E616870090C82D /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
@@ -729,9 +730,10 @@
 		BBECDDF120D6F78B00458146 /* PaceKeeper.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				BB26A9A020EC0C7A0045FBAB /* PaceKeeper v2.xcdatamodel */,
 				BBECDDF220D6F78B00458146 /* PaceKeeper.xcdatamodel */,
 			);
-			currentVersion = BBECDDF220D6F78B00458146 /* PaceKeeper.xcdatamodel */;
+			currentVersion = BB26A9A020EC0C7A0045FBAB /* PaceKeeper v2.xcdatamodel */;
 			path = PaceKeeper.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

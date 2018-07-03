@@ -29,5 +29,7 @@
 - (void)deleteAllExercisesNamed:(NSString *)name;
 - (void)updateLatestExercise:(NSString *)oldName withExercise:(ExerciseObject *)exercise;
 - (BOOL)nameExists:(NSString *)name;
+- (void)updateNotificationsEnabled:(ExerciseObject *)exercise enabled:(BOOL)enabled;
+- (void)updateNotificationHour:(ExerciseObject *)exercise hour:(int)hour;
 
 @end

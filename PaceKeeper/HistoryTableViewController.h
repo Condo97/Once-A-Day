@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Defines.pch"
 
-@interface HistoryTableViewController : UITableViewController
+@interface HistoryTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (strong, nonatomic) ExerciseObject *currentExercise;
 
