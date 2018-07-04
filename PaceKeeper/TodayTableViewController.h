@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreKitManager.h"
 
 @interface TodayTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 

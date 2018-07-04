@@ -32,6 +32,8 @@
     [self.hourPicker setDelegate:self];
     [self.hourPicker setDataSource:self];
     
+    [[StoreKitManager sharedManager] setDelegate:self];
+    
     self.globalHour = self.currentExercise.notificationHour;
     
     self.pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
@@ -56,8 +58,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 0)
-        return 2;
+    if(section == 0) {
+        if(((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue)
+            return 2;
+        return 3;
+    }
     return self.exercises.count;
 }
 
@@ -82,10 +87,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0) {
-        if(indexPath.row == 0) {
+        if(indexPath.row == 0 && !((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+            NotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"premiumCell"];
+            [cell.getPremiumButton addTarget:self action:@selector(getPremium:) forControlEvents:UIControlEventTouchUpInside];
+            return cell;
+        } else if((indexPath.row == 0 && ((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) || (indexPath.row == 1 && !((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue)) {
             NotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
             [cell.notificationSwitch addTarget:self action:@selector(notificationSwitchSwitched:) forControlEvents:UIControlEventValueChanged];
             [cell.notificationSwitch setOn:self.currentExercise.notificationsEnabled];
+            
+            if(((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue)
+                [cell.notificationSwitch setEnabled:YES];
+            else
+                [cell.notificationSwitch setEnabled:NO];
+            
             return cell;
         }
         
@@ -246,6 +261,27 @@
     
     NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     [cell.timePlaceholder resignFirstResponder];
+}
+
+- (void)getPremium:(id)sender {
+    [[StoreKitManager sharedManager] startPremiumPurchase];
+}
+
+- (void)purchaseSuccessful {
+    [KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
+    
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView reloadData];
+    [self.tableView endUpdates];
+    
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Thank you!" message:@"Thank you for your purchase! You now have access to premium features." preferredStyle:UIAlertControllerStyleAlert];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Sounds good!" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)purchaseUnsuccessful {
+    
 }
 
 @end

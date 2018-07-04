@@ -29,6 +29,23 @@
     [super viewDidLoad];
     [self loadAndUpdate];
     
+    int r = arc4random_uniform(21);
+    if(r <= 5) {
+        if([[KFKeychain loadObjectForKey:PREMIUM_PURCHASED] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium!" message:@"Premium currently adds the ability to add periodic notifications for your exercises, with more features coming soon!" preferredStyle:UIAlertControllerStyleAlert];
+            [ac addAction:[UIAlertAction actionWithTitle:@"Not now" style:UIAlertActionStyleCancel handler:nil]];
+            [ac addAction:[UIAlertAction actionWithTitle:@"Sure!" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [[StoreKitManager sharedManager] setDelegate:self];
+                [[StoreKitManager sharedManager] startPremiumPurchase];
+            }]];
+            
+            [self presentViewController:ac animated:YES completion:nil];
+        }
+    }
+    
+    
+    NSLog(@"asd: %d", ((NSNumber *)[KFKeychain loadObjectForKey:@"purchasedPremium"]).boolValue);
+    
     self.pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     [self.pickerToolbar sizeToFit];
     
@@ -329,6 +346,19 @@
         [self.periodPicker selectRow:0 inComponent:0 animated:NO];
         [self.addExerciseView.intervalField setText:self.predefinedIntervals[0]];
     }
+}
+
+- (void)purchaseSuccessful {
+    [KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
+    
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Thank you!" message:@"Thank you for your purchase! You now have access to premium features." preferredStyle:UIAlertControllerStyleAlert];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Sounds good!" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:ac animated:YES completion:nil];
+    
+}
+
+- (void)purchaseUnsuccessful {
+    
 }
 
 @end

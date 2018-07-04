@@ -32,7 +32,7 @@
     }];
     
     
-    int r = arc4random_uniform(7);
+    int r = arc4random_uniform(21);
     if(r == 5)
         [SKStoreReviewController requestReview];
     

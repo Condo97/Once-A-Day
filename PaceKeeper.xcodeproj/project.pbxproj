@@ -10,6 +10,8 @@
 		BB0EAF6920DA45FD003040BC /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0EAF6820DA45FD003040BC /* ScheduleTableViewController.m */; };
 		BB0EAF6D20DA461F003040BC /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0EAF6C20DA461F003040BC /* ScheduleTableViewCell.m */; };
 		BB1A7EBA20DA7DF600843458 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */; };
+		BB26A9A320EC28640045FBAB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB26A9A220EC28640045FBAB /* StoreKit.framework */; };
+		BB26A9A920EC2F090045FBAB /* StoreKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB26A9A820EC2F090045FBAB /* StoreKitManager.m */; };
 		BB4B981C20E6166E0090C82D /* KFKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981A20E6166E0090C82D /* KFKeychain.m */; };
 		BB4B981F20E616870090C82D /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981E20E616870090C82D /* NetworkManager.m */; };
 		BB4B982220E618070090C82D /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B982120E618070090C82D /* NotificationTableViewCell.m */; };
@@ -57,6 +59,10 @@
 		BB1A7EB820DA7DF600843458 /* HistoryTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
 		BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
 		BB26A9A020EC0C7A0045FBAB /* PaceKeeper v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PaceKeeper v2.xcdatamodel"; sourceTree = "<group>"; };
+		BB26A9A220EC28640045FBAB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BB26A9A720EC2F090045FBAB /* StoreKitManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreKitManager.h; sourceTree = "<group>"; };
+		BB26A9A820EC2F090045FBAB /* StoreKitManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreKitManager.m; sourceTree = "<group>"; };
+		BB26A9AA20EC2F880045FBAB /* SecretDefines.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecretDefines.pch; sourceTree = "<group>"; };
 		BB4B981A20E6166E0090C82D /* KFKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFKeychain.m; sourceTree = "<group>"; };
 		BB4B981B20E6166E0090C82D /* KFKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFKeychain.h; sourceTree = "<group>"; };
 		BB4B981D20E616870090C82D /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
@@ -104,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB26A9A320EC28640045FBAB /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +144,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		BB26A9A120EC28640045FBAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB26A9A220EC28640045FBAB /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BB4B981920E6166E0090C82D /* KFKeychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +168,7 @@
 				BBECDE0320D6F78E00458146 /* PaceKeeperTests */,
 				BBECDE0E20D6F78E00458146 /* PaceKeeperUITests */,
 				BBECDDE620D6F78B00458146 /* Products */,
+				BB26A9A120EC28640045FBAB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,6 +206,7 @@
 				BBECDDF920D6F78E00458146 /* Info.plist */,
 				BBECDDFA20D6F78E00458146 /* main.m */,
 				BB790D7920D8F88900890E60 /* Defines.pch */,
+				BB26A9AA20EC2F880045FBAB /* SecretDefines.pch */,
 				BBECDDF120D6F78B00458146 /* PaceKeeper.xcdatamodeld */,
 			);
 			path = PaceKeeper;
@@ -235,6 +252,8 @@
 				BBECDE3420D7F61300458146 /* CDManager.m */,
 				BB4B981D20E616870090C82D /* NetworkManager.h */,
 				BB4B981E20E616870090C82D /* NetworkManager.m */,
+				BB26A9A720EC2F090045FBAB /* StoreKitManager.h */,
+				BB26A9A820EC2F090045FBAB /* StoreKitManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -324,6 +343,9 @@
 					BBECDDE420D6F78B00458146 = {
 						CreatedOnToolsVersion = 9.3.1;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -402,6 +424,7 @@
 				BBECDDFB20D6F78E00458146 /* main.m in Sources */,
 				BBECDE3620D7F61300458146 /* CDManager.m in Sources */,
 				BBECDDF320D6F78B00458146 /* PaceKeeper.xcdatamodeld in Sources */,
+				BB26A9A920EC2F090045FBAB /* StoreKitManager.m in Sources */,
 				BBECDE2C20D7F42900458146 /* TodayTableViewController.m in Sources */,
 				BB0EAF6D20DA461F003040BC /* ScheduleTableViewCell.m in Sources */,
 				BB0EAF6920DA45FD003040BC /* ScheduleTableViewController.m in Sources */,
