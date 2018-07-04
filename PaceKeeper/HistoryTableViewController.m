@@ -45,6 +45,9 @@
     
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
     self.exercises = [[[CDManager sharedManager] getPastExercises:self.currentExercise.name] sortedArrayUsingDescriptors:@[descriptor]];
+    
+    [[NetworkManager sharedManager] setNotificationHour:[KFKeychain loadObjectForKey:@"DeviceToken"] exerciseName:self.currentExercise.name notificationHour:self.globalHour];
+    [[NetworkManager sharedManager] toggleNotifications:[KFKeychain loadObjectForKey:@"DeviceToken"] exerciseName:self.currentExercise.name enabled:self.currentExercise.notificationsEnabled];
 }
 
 - (void)didReceiveMemoryWarning {
