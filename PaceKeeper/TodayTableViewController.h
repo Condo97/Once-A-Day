@@ -11,4 +11,7 @@
 
 @interface TodayTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *motivationalQuote;
+@property (weak, nonatomic) IBOutlet UILabel *motivationalAuthor;
+
 @end

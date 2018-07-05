@@ -29,8 +29,12 @@
     [super viewDidLoad];
     [self loadAndUpdate];
     
+    int ra = arc4random_uniform((uint32_t)MOTIVATIONAL_QUOTES.count);
+    [self.motivationalQuote setText:MOTIVATIONAL_QUOTES[ra][0]];
+    [self.motivationalAuthor setText:MOTIVATIONAL_QUOTES[ra][1]];
+    
     int r = arc4random_uniform(21);
-    if(r <= 5) {
+    if(r == 5) {
         if([[KFKeychain loadObjectForKey:PREMIUM_PURCHASED] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
             UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium!" message:@"Premium currently adds the ability to add periodic notifications for your exercises, with more features coming soon!" preferredStyle:UIAlertControllerStyleAlert];
             [ac addAction:[UIAlertAction actionWithTitle:@"Not now" style:UIAlertActionStyleCancel handler:nil]];
@@ -42,7 +46,6 @@
             [self presentViewController:ac animated:YES completion:nil];
         }
     }
-    
     
     NSLog(@"asd: %d", ((NSNumber *)[KFKeychain loadObjectForKey:@"purchasedPremium"]).boolValue);
     

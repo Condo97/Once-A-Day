@@ -27,5 +27,11 @@
 @"Every Six Days",\
 @"Weekly",\
 nil]
+#define MOTIVATIONAL_QUOTES [[NSArray alloc] initWithObjects:\
+@[@"Don't have time?\nYou don't want it enough.", @""],\
+@[@"It always seems impossible until it's done.", @"Nelson Mandela"],\
+@[@"Believe you can\nand you're halfway there.", @"Theodore Roosevelt"],\
+@[@"If you aren’t going all the way, why go at all?", @"Joe Namath"],\
+@[@"It isn’t the mountains ahead to climb that wear you out; it’s the pebble in your shoe.", @"Muhammad Ali"], nil]
 
 #endif /* Defines_pch */

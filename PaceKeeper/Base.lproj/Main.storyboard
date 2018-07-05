@@ -37,18 +37,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.2901960784" green="0.5450980392" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
-                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zun-4B-npU">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="121"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="7Yp-PW-OLf">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">"Don't have time?
-You don't want it enough."</string>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HpR-ka-fsb">
+                                    <rect key="frame" x="8" y="0.0" width="359" height="121"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="121" id="m06-yd-AK3"/>
+                                    </constraints>
+                                    <string key="text">"Don't have time? 
+You don't want it enough".</string>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Unknown" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yt-pS-Bq2">
+                                    <rect key="frame" x="0.0" y="121" width="375" height="9"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="7"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="9yt-pS-Bq2" secondAttribute="trailing" id="1Kk-R8-Sgf"/>
+                                <constraint firstItem="HpR-ka-fsb" firstAttribute="top" secondItem="7Yp-PW-OLf" secondAttribute="top" id="Asp-Dd-7D3"/>
+                                <constraint firstItem="HpR-ka-fsb" firstAttribute="leading" secondItem="7Yp-PW-OLf" secondAttribute="leading" constant="8" id="Av7-21-1xy"/>
+                                <constraint firstItem="9yt-pS-Bq2" firstAttribute="leading" secondItem="7Yp-PW-OLf" secondAttribute="leading" id="WMS-FY-4Oh"/>
+                                <constraint firstAttribute="trailing" secondItem="HpR-ka-fsb" secondAttribute="trailing" constant="8" id="bxy-gE-OU6"/>
+                                <constraint firstAttribute="bottom" secondItem="9yt-pS-Bq2" secondAttribute="bottom" id="isp-dB-fhc"/>
+                                <constraint firstItem="9yt-pS-Bq2" firstAttribute="top" secondItem="HpR-ka-fsb" secondAttribute="bottom" id="lXB-gB-Sb9"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="exerciseCell" rowHeight="75" id="NB0-Qo-tIC" customClass="TodayTableViewCell">
-                                <rect key="frame" x="0.0" y="176.5" width="375" height="75"/>
+                                <rect key="frame" x="0.0" y="185.5" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NB0-Qo-tIC" id="ru7-2V-6Pk">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -252,6 +277,10 @@ You don't want it enough."</string>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="motivationalAuthor" destination="9yt-pS-Bq2" id="ukD-Yy-5Vt"/>
+                        <outlet property="motivationalQuote" destination="HpR-ka-fsb" id="2Ua-w3-toA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZ0-F2-uPS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
