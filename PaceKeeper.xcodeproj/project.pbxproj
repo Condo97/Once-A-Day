@@ -12,6 +12,7 @@
 		BB1A7EBA20DA7DF600843458 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */; };
 		BB26A9A320EC28640045FBAB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB26A9A220EC28640045FBAB /* StoreKit.framework */; };
 		BB26A9A920EC2F090045FBAB /* StoreKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB26A9A820EC2F090045FBAB /* StoreKitManager.m */; };
+		BB26A9AE20EEFD770045FBAB /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB26A9AD20EEFD770045FBAB /* GoogleMobileAds.framework */; };
 		BB4B981C20E6166E0090C82D /* KFKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981A20E6166E0090C82D /* KFKeychain.m */; };
 		BB4B981F20E616870090C82D /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981E20E616870090C82D /* NetworkManager.m */; };
 		BB4B982220E618070090C82D /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B982120E618070090C82D /* NotificationTableViewCell.m */; };
@@ -63,6 +64,8 @@
 		BB26A9A720EC2F090045FBAB /* StoreKitManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreKitManager.h; sourceTree = "<group>"; };
 		BB26A9A820EC2F090045FBAB /* StoreKitManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreKitManager.m; sourceTree = "<group>"; };
 		BB26A9AA20EC2F880045FBAB /* SecretDefines.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecretDefines.pch; sourceTree = "<group>"; };
+		BB26A9AB20EEFD2F0045FBAB /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../Downloads/GoogleMobileAdsSdkiOS-7.31.0/GoogleMobileAds.framework"; sourceTree = "<group>"; };
+		BB26A9AD20EEFD770045FBAB /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		BB4B981A20E6166E0090C82D /* KFKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFKeychain.m; sourceTree = "<group>"; };
 		BB4B981B20E6166E0090C82D /* KFKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFKeychain.h; sourceTree = "<group>"; };
 		BB4B981D20E616870090C82D /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB26A9AE20EEFD770045FBAB /* GoogleMobileAds.framework in Frameworks */,
 				BB26A9A320EC28640045FBAB /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +151,8 @@
 		BB26A9A120EC28640045FBAB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB26A9AB20EEFD2F0045FBAB /* GoogleMobileAds.framework */,
+				BB26A9AD20EEFD770045FBAB /* GoogleMobileAds.framework */,
 				BB26A9A220EC28640045FBAB /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -603,6 +609,10 @@
 				CODE_SIGN_ENTITLEMENTS = PaceKeeper/PaceKeeper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PaceKeeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -622,6 +632,10 @@
 				CODE_SIGN_ENTITLEMENTS = PaceKeeper/PaceKeeper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PaceKeeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

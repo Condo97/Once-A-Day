@@ -19,6 +19,8 @@
 @property (nonatomic) int globalHour;
 //@property (strong, nonatomic) NSMutableArray *differentDates;
 
+@property (strong, nonatomic) GADBannerView *bannerView;
+
 @end
 
 @implementation HistoryTableViewController
@@ -48,6 +50,25 @@
     
     [[NetworkManager sharedManager] setNotificationHour:[KFKeychain loadObjectForKey:@"DeviceToken"] exerciseName:self.currentExercise.name notificationHour:self.globalHour];
     [[NetworkManager sharedManager] toggleNotifications:[KFKeychain loadObjectForKey:@"DeviceToken"] exerciseName:self.currentExercise.name enabled:self.currentExercise.notificationsEnabled];
+    
+    //Google Mobile Ads Setup
+    self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    [self.bannerView setAdUnitID:HISTORY_AD_UNIT];
+    [self.bannerView setRootViewController:self];
+    [self.bannerView loadRequest:[GADRequest request]];
+    [self.bannerView setFrame:CGRectMake(0, self.tableView.frame.size.height - 50 - [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom, self.tableView.frame.size.width, 50)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+        [self.navigationController.view addSubview:self.bannerView];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+        [self.bannerView removeFromSuperview];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +114,7 @@
         if(indexPath.row == 0 && !((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
             NotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"premiumCell"];
             [cell.getPremiumButton addTarget:self action:@selector(getPremium:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.premiumInfoButton addTarget:self action:@selector(premiumInfoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         } else if((indexPath.row == 0 && ((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) || (indexPath.row == 1 && !((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue)) {
             NotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
@@ -268,6 +290,15 @@
 
 - (void)getPremium:(id)sender {
     [[StoreKitManager sharedManager] startPremiumPurchase];
+}
+
+- (void)premiumInfoButtonPressed:(id)sender {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium" message:@"Premium lets you set custom notifications to remind you to exercise! If you've already purchased Premium, select \"Restore\"." preferredStyle:UIAlertControllerStyleAlert];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleCancel handler:nil]];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Restore" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [[StoreKitManager sharedManager] restorePurchases];
+    }]];
+    [self presentViewController:ac animated:YES completion:nil];
 }
 
 - (void)purchaseSuccessful {

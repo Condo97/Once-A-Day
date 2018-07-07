@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSArray<ExerciseObject *> *exercises, *todaysExercises;
 @property (strong, nonatomic) NSArray<NSString *> *predefinedIntervals;
 
+@property (strong, nonatomic) GADBannerView *bannerView;
+
 @end
 
 @implementation ScheduleTableViewController
@@ -27,6 +29,13 @@
     self.predefinedIntervals = PREDEFINED_INTERVALS;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self loadEverything];
+    
+    //Google Mobile Ads Setup
+    self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    [self.bannerView setAdUnitID:SCHEDULE_AD_UNIT];
+    [self.bannerView setRootViewController:self];
+    [self.bannerView loadRequest:[GADRequest request]];
+    [self.bannerView setFrame:CGRectMake(0, self.tableView.frame.size.height - 50 - [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom, self.tableView.frame.size.width, 50)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +44,18 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+        [self.navigationController.view addSubview:self.bannerView];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+        [self.bannerView removeFromSuperview];
+    }
 }
 
 - (void)loadEverything {

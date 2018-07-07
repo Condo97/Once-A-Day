@@ -536,14 +536,20 @@ You don't want it enough".</string>
                                             <rect key="frame" x="140" y="7" width="94" height="30"/>
                                             <state key="normal" title="Get Premium!"/>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85b-6i-W5J">
+                                            <rect key="frame" x="337" y="11" width="22" height="22"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="gYg-8y-ZvC" firstAttribute="centerX" secondItem="lmw-1c-V6W" secondAttribute="centerX" id="9eO-Fh-2YD"/>
+                                        <constraint firstItem="85b-6i-W5J" firstAttribute="trailing" secondItem="lmw-1c-V6W" secondAttribute="trailingMargin" id="His-pg-G8m"/>
                                         <constraint firstItem="gYg-8y-ZvC" firstAttribute="centerY" secondItem="lmw-1c-V6W" secondAttribute="centerY" id="aqh-Cn-8Bp"/>
+                                        <constraint firstItem="85b-6i-W5J" firstAttribute="centerY" secondItem="lmw-1c-V6W" secondAttribute="centerY" id="fJD-dL-3zo"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="getPremiumButton" destination="gYg-8y-ZvC" id="K5a-GU-ifE"/>
+                                    <outlet property="premiumInfoButton" destination="85b-6i-W5J" id="T6Y-9P-bOD"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

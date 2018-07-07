@@ -21,6 +21,8 @@
 @property (strong, nonatomic) UIPickerView *periodPicker; //Should be period picker
 @property (strong, nonatomic) UIToolbar *pickerToolbar;
 
+@property (strong, nonatomic) GADBannerView *bannerView;
+
 @end
 
 @implementation TodayTableViewController
@@ -29,13 +31,16 @@
     [super viewDidLoad];
     [self loadAndUpdate];
     
+    //DEVELOPMENT USE ONLY, MAKE SURE TO COMMENT AGAIN!!!!
+    //[KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
+    
     int ra = arc4random_uniform((uint32_t)MOTIVATIONAL_QUOTES.count);
     [self.motivationalQuote setText:MOTIVATIONAL_QUOTES[ra][0]];
     [self.motivationalAuthor setText:MOTIVATIONAL_QUOTES[ra][1]];
     
     int r = arc4random_uniform(21);
     if(r == 5) {
-        if([[KFKeychain loadObjectForKey:PREMIUM_PURCHASED] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+        if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
             UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium!" message:@"Premium currently adds the ability to add periodic notifications for your exercises, with more features coming soon!" preferredStyle:UIAlertControllerStyleAlert];
             [ac addAction:[UIAlertAction actionWithTitle:@"Not now" style:UIAlertActionStyleCancel handler:nil]];
             [ac addAction:[UIAlertAction actionWithTitle:@"Sure!" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -94,6 +99,13 @@
     
     [self.view addSubview:self.blur];
     [self.view addSubview:self.addExerciseView];
+    
+    //Google Mobile Ads Setup
+    self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    [self.bannerView setAdUnitID:HOME_AD_UNIT];
+    [self.bannerView setRootViewController:self];
+    [self.bannerView loadRequest:[GADRequest request]];
+    [self.bannerView setFrame:CGRectMake(0, self.tableView.frame.size.height - 50 - [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom, self.tableView.frame.size.width, 50)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,6 +115,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAndUpdate];
     [self.tableView reloadData];
+    if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+        [self.navigationController.view addSubview:self.bannerView];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+        [self.bannerView removeFromSuperview];
+    }
 }
 
 - (void)loadAndUpdate {

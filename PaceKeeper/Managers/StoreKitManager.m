@@ -87,7 +87,7 @@
     }
 }
 
-- (void) restorePurchases {
+- (void)restorePurchases {
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 

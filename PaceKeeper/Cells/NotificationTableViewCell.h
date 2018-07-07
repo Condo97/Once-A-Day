@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *timePlaceholder;
 @property (weak, nonatomic) IBOutlet UIButton *getPremiumButton;
+@property (weak, nonatomic) IBOutlet UIButton *premiumInfoButton;
 
 @end

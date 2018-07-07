@@ -14,6 +14,8 @@
 #import "KFKeychain.h"
 #import "SecretDefines.pch"
 
+@import GoogleMobileAds;
+
 //#define GREEN [UIColor colorWithRed:0.0/255.0 green:191.0/255.0 blue:0.0/255.0 alpha:1.0]
 #define GREEN [UIColor colorWithRed:58/255.0 green:213.0/255.0 blue:49.0/255.0 alpha:1.0]
 #define RED [UIColor colorWithRed:255.0/255.0 green:49.0/255.0 blue:0.0/255.0 alpha:1.0]
