@@ -10,6 +10,7 @@
 #import "NotificationTableViewCell.h"
 #import "NetworkManager.h"
 #import "KFKeychain.h"
+#import "MetaTableViewCell.h"
 
 @interface HistoryTableViewController ()
 
@@ -20,6 +21,8 @@
 //@property (strong, nonatomic) NSMutableArray *differentDates;
 
 @property (strong, nonatomic) GADBannerView *bannerView;
+@property (strong, nonatomic) UIPickerView *periodPicker;;
+@property (strong, nonatomic) ExerciseObject *tempExercise;
 
 @end
 
@@ -28,11 +31,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     [self setTitle:self.currentExercise.name];
     
     self.hourPicker = [[UIPickerView alloc] init];
     [self.hourPicker setDelegate:self];
     [self.hourPicker setDataSource:self];
+    
+    self.periodPicker = [[UIPickerView alloc] init];
+    [self.periodPicker setDelegate:self];
+    [self.periodPicker setDataSource:self];
     
     [[StoreKitManager sharedManager] setDelegate:self];
     
@@ -78,11 +87,13 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0) {
+        return 4;
+    } else if(section == 1) {
         if(((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue)
             return 2;
         return 3;
@@ -92,12 +103,14 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0)
+        return @"Tap \"Edit\" to change fields!";
+    else if(section == 2)
         return [NSString stringWithFormat:@"%d Total %@!", [[CDManager sharedManager] getTotalForExercise:self.currentExercise.name], self.currentExercise.name];
     return @"";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if(section == 0) {
+    if(section == 0 || section == 2) {
         UILabel *myLabel = [[UILabel alloc] init];
         [myLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [myLabel setTextColor:[UIColor whiteColor]];
@@ -111,6 +124,45 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0) {
+        MetaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"metaCell"];
+        [cell.textField setInputAccessoryView:self.pickerToolbar];
+        [cell.textField setDelegate:self];
+
+        if(self.isEditing)
+           [cell.textField setEnabled:YES];
+        else
+            [cell.textField setEnabled:NO];
+        
+        switch(indexPath.row) {
+            case 0: {
+                [cell.title setText:@"Name:"];
+                [cell.textField setText:self.currentExercise.name];
+                break;
+            }
+            case 1: {
+                [cell.title setText:@"Initial Goal:"];
+                [cell.textField setText:[NSString stringWithFormat:@"%d", self.currentExercise.goal]];
+                [cell.textField setKeyboardType:UIKeyboardTypeNumberPad];
+
+                break;
+            }
+            case 2: {
+                [cell.title setText:@"Interval:"];
+                [cell.textField setText:PREDEFINED_INTERVALS[self.currentExercise.period]];
+                [cell.textField setInputView:self.periodPicker];
+                [self.periodPicker selectRow:self.currentExercise.period inComponent:0 animated:NO];
+                break;
+            }
+            case 3: {
+                [cell.title setText:@"Increment:"];
+                [cell.textField setText:[NSString stringWithFormat:@"%d", self.currentExercise.goal]];
+                [cell.textField setKeyboardType:UIKeyboardTypeNumberPad];
+                break;
+            }
+        }
+        
+        return cell;
+    } else if(indexPath.section == 1) {
         if(indexPath.row == 0 && !((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
             NotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"premiumCell"];
             [cell.getPremiumButton addTarget:self action:@selector(getPremium:) forControlEvents:UIControlEventTouchUpInside];
@@ -208,27 +260,35 @@
         [[NetworkManager sharedManager] registerDevice:deviceID exerciseName:self.currentExercise.name interval:self.currentExercise.period + 1 date:self.currentExercise.date];
         [[NetworkManager sharedManager] toggleNotifications:deviceID exerciseName:self.currentExercise.name enabled:YES];
         [self.currentExercise setNotificationsEnabled:YES];
-        NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
         [cell.timePlaceholder setEnabled:YES];
     } else {
         [[NetworkManager sharedManager] toggleNotifications:deviceID exerciseName:self.currentExercise.name enabled:NO];
         [self.currentExercise setNotificationsEnabled:NO];
-        NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
         [cell.timePlaceholder setEnabled:NO];
     }
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    if([pickerView isEqual:self.periodPicker])
+        return 1;
     return 2;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if([pickerView isEqual:self.periodPicker])
+        return PREDEFINED_INTERVALS.count;
+    
     if(component == 0)
         return 12;
     return 2;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if([pickerView isEqual:self.periodPicker])
+        return PREDEFINED_INTERVALS[row];
+    
     if(component == 1) {
         if(row == 0)
             return @"am";
@@ -241,51 +301,59 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    long hour = -1;
-    NSString *am = @"am";
-    if(component == 0) {
-        hour = row + 1;
-        if([pickerView selectedRowInComponent:1] == 0) {
-            if(row == 11) {
-                self.globalHour = 0;
-            } else {
-                self.globalHour = (int)row + 1;
-            }
-        } else {
-            if(row == 11) {
-                self.globalHour = 12;
-            } else {
-                self.globalHour = (int)row + 1 + 12;
-            }
-            am = @"pm";
-        }
+    if([pickerView isEqual:self.periodPicker]) {
+        [self.tempExercise setPeriod:(int)row];
+        [((MetaTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).textField setText:PREDEFINED_INTERVALS[row]];
     } else {
-        hour = [pickerView selectedRowInComponent:0] + 1;
-        if(row == 0) {
-            if(hour == 12)
-                self.globalHour = 0;
-            else
-                self.globalHour = (int)hour;
+        long hour = -1;
+        NSString *am = @"am";
+        if(component == 0) {
+            hour = row + 1;
+            if([pickerView selectedRowInComponent:1] == 0) {
+                if(row == 11) {
+                    self.globalHour = 0;
+                } else {
+                    self.globalHour = (int)row + 1;
+                }
+            } else {
+                if(row == 11) {
+                    self.globalHour = 12;
+                } else {
+                    self.globalHour = (int)row + 1 + 12;
+                }
+                am = @"pm";
+            }
         } else {
-            if(hour == 12)
-                self.globalHour = 12;
-            else
-                self.globalHour = (int)hour + 12;
-            am = @"pm";
+            hour = [pickerView selectedRowInComponent:0] + 1;
+            if(row == 0) {
+                if(hour == 12)
+                    self.globalHour = 0;
+                else
+                    self.globalHour = (int)hour;
+            } else {
+                if(hour == 12)
+                    self.globalHour = 12;
+                else
+                    self.globalHour = (int)hour + 12;
+                am = @"pm";
+            }
         }
+        
+        NSLog(@"%d", self.globalHour);
+        NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+        [cell.timePlaceholder setText:[NSString stringWithFormat:@"%ld:00 %@", hour, am]];
     }
-    
-    NSLog(@"%d", self.globalHour);
-    NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    [cell.timePlaceholder setText:[NSString stringWithFormat:@"%ld:00 %@", hour, am]];
 }
 
 - (void)pickerDoneButtonPressed:(id)sender {
     self.currentExercise.notificationHour = self.globalHour;
     [[NetworkManager sharedManager] setNotificationHour:[KFKeychain loadObjectForKey:@"DeviceToken"] exerciseName:self.currentExercise.name notificationHour:self.globalHour];
     
-    NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    NotificationTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
     [cell.timePlaceholder resignFirstResponder];
+    
+    for(int i = 0; i < 4; i++)
+        [((MetaTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]]).textField resignFirstResponder];
 }
 
 - (void)getPremium:(id)sender {
@@ -301,11 +369,38 @@
     [self presentViewController:ac animated:YES completion:nil];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    
+    if(editing) {
+        self.tempExercise = [[ExerciseObject alloc] initWithName:self.currentExercise.name goal:self.currentExercise.goal completed:self.currentExercise.completed increment:self.currentExercise.increment period:self.currentExercise.period identifier:self.currentExercise.identifier date:self.currentExercise.date notificationsEnabled:self.currentExercise.notificationsEnabled notificationHour:self.currentExercise.notificationHour];
+        [self.tableView reloadData];
+    } else {
+        [self.tempExercise setName:((MetaTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField.text];
+        [self.tempExercise setGoal:((MetaTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).textField.text.intValue];
+        [self.tempExercise setIncrement:((MetaTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).textField.text.intValue];
+        
+        [[CDManager sharedManager] updateLatestExercise:self.currentExercise.name withExercise:self.tempExercise];
+        
+        [self setTitle:self.tempExercise.name];
+        
+        for(int i = 0; i < 4; i++)
+            [((MetaTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]]).textField resignFirstResponder];
+        
+        self.currentExercise = self.tempExercise;
+        [self.tableView reloadData];
+    }
+}
+
 - (void)purchaseSuccessful {
     [KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
     
     [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView reloadData];
     [self.tableView endUpdates];
     
@@ -316,6 +411,20 @@
 
 - (void)purchaseUnsuccessful {
     
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.!?@#"] invertedSet];
+    
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    
+    if(range.length + range.location > textField.text.length) {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    
+    return ([string isEqualToString:filtered] && newLength <= 59);
 }
 
 @end

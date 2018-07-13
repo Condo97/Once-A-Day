@@ -10,7 +10,7 @@
 #import "Defines.pch"
 #import "StoreKitManager.h"
 
-@interface HistoryTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, StoreKitManagerDelegate>
+@interface HistoryTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, StoreKitManagerDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) ExerciseObject *currentExercise;
 

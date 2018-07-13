@@ -16,6 +16,7 @@
 		BB4B981C20E6166E0090C82D /* KFKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981A20E6166E0090C82D /* KFKeychain.m */; };
 		BB4B981F20E616870090C82D /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981E20E616870090C82D /* NetworkManager.m */; };
 		BB4B982220E618070090C82D /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B982120E618070090C82D /* NotificationTableViewCell.m */; };
+		BB9AD1D220F8F1D9008F1914 /* MetaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9AD1D120F8F1D9008F1914 /* MetaTableViewCell.m */; };
 		BBECDDEA20D6F78B00458146 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDDE920D6F78B00458146 /* AppDelegate.m */; };
 		BBECDDF020D6F78B00458146 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBECDDEE20D6F78B00458146 /* Main.storyboard */; };
 		BBECDDF320D6F78B00458146 /* PaceKeeper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBECDDF120D6F78B00458146 /* PaceKeeper.xcdatamodeld */; };
@@ -73,6 +74,8 @@
 		BB4B982020E618070090C82D /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		BB4B982120E618070090C82D /* NotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
 		BB790D7920D8F88900890E60 /* Defines.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.pch; sourceTree = "<group>"; };
+		BB9AD1D020F8F1D9008F1914 /* MetaTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetaTableViewCell.h; sourceTree = "<group>"; };
+		BB9AD1D120F8F1D9008F1914 /* MetaTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetaTableViewCell.m; sourceTree = "<group>"; };
 		BBC167B520E40342006482B8 /* PaceKeeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaceKeeper.entitlements; sourceTree = "<group>"; };
 		BBECDDE520D6F78B00458146 /* PaceKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaceKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBECDDE820D6F78B00458146 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 				BB0EAF6C20DA461F003040BC /* ScheduleTableViewCell.m */,
 				BB4B982020E618070090C82D /* NotificationTableViewCell.h */,
 				BB4B982120E618070090C82D /* NotificationTableViewCell.m */,
+				BB9AD1D020F8F1D9008F1914 /* MetaTableViewCell.h */,
+				BB9AD1D120F8F1D9008F1914 /* MetaTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				BB1A7EBA20DA7DF600843458 /* HistoryTableViewController.m in Sources */,
 				BBECDDEA20D6F78B00458146 /* AppDelegate.m in Sources */,
 				BBECDE2820D7984800458146 /* RoundedView.m in Sources */,
+				BB9AD1D220F8F1D9008F1914 /* MetaTableViewCell.m in Sources */,
 				BBECDDFB20D6F78E00458146 /* main.m in Sources */,
 				BBECDE3620D7F61300458146 /* CDManager.m in Sources */,
 				BBECDDF320D6F78B00458146 /* PaceKeeper.xcdatamodeld in Sources */,

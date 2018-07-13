@@ -25,10 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.todaysExercises = [[CDManager sharedManager] getTodaysExercises];
     self.predefinedIntervals = PREDEFINED_INTERVALS;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self loadEverything];
     
     //Google Mobile Ads Setup
     self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
@@ -47,6 +45,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    self.todaysExercises = [[CDManager sharedManager] getTodaysExercises];
+    [self loadEverything];
+    
     if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
         [self.navigationController.view addSubview:self.bannerView];
     }

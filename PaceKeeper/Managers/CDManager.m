@@ -305,8 +305,6 @@
             [object setValue:exercise.date forKey:@"date"];
             [object setValue:[NSNumber numberWithBool:exercise.notificationsEnabled] forKey:@"notificationsEnabled"];
             [object setValue:[NSNumber numberWithInt:exercise.notificationHour] forKey:@"notificationHour"];
-            
-            
         }
     }
     
