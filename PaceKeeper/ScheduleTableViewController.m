@@ -150,7 +150,13 @@
             [ac addAction:[UIAlertAction actionWithTitle:@"Wimp Out" style:UIAlertActionStyleCancel handler:nil]];
             [ac addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 ExerciseObject *e = self.exercises[indexPath.row];
-                ExerciseObject *temp = [[ExerciseObject alloc] initWithName:e.name goal:e.goal completed:0 increment:e.increment period:e.period identifier:e.identifier + 1 date:[NSDate date] notificationsEnabled:e.notificationsEnabled notificationHour:e.notificationHour];
+                int newGoal = e.goal;
+                if(e.goal == e.completed)
+                    newGoal = e.goal + e.increment;
+                else if(e.completed > e.goal)
+                    newGoal = e.completed;
+                
+                ExerciseObject *temp = [[ExerciseObject alloc] initWithName:e.name goal:newGoal completed:0 increment:e.increment period:e.period identifier:e.identifier + 1 date:[NSDate date] notificationsEnabled:e.notificationsEnabled notificationHour:e.notificationHour];
                 [[CDManager sharedManager] saveExercise:temp];
                 
                 //Change the colors and stuff
