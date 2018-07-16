@@ -155,7 +155,7 @@
             }
             case 3: {
                 [cell.title setText:@"Increment:"];
-                [cell.textField setText:[NSString stringWithFormat:@"%d", self.currentExercise.goal]];
+                [cell.textField setText:[NSString stringWithFormat:@"%d", self.currentExercise.increment]];
                 [cell.textField setKeyboardType:UIKeyboardTypeNumberPad];
                 break;
             }
