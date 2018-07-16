@@ -405,4 +405,8 @@
     [context save:&error2];
 }
 
+- (void)saveImage:(UIImage *)image date:(NSDate *)date {
+    
+}
+
 @end

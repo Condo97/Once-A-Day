@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "StoreKitManager.h"
+#import "OtherTodayTableViewCell.h"
 
 @interface TodayTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 

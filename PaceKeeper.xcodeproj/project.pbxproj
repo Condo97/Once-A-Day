@@ -34,6 +34,7 @@
 		BBECDE3920D7F76900458146 /* ExerciseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE3820D7F76900458146 /* ExerciseObject.m */; };
 		BBECDE3C20D8398000458146 /* AddExercise.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBECDE3B20D8398000458146 /* AddExercise.xib */; };
 		BBECDE3F20D8E1E400458146 /* AddExerciseView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE3E20D8E1E400458146 /* AddExerciseView.m */; };
+		BBF60E6B20FD51050097A98A /* OtherTodayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF60E6A20FD51050097A98A /* OtherTodayTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,9 @@
 		BBECDE3B20D8398000458146 /* AddExercise.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddExercise.xib; sourceTree = "<group>"; };
 		BBECDE3D20D8E1E400458146 /* AddExerciseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddExerciseView.h; sourceTree = "<group>"; };
 		BBECDE3E20D8E1E400458146 /* AddExerciseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddExerciseView.m; sourceTree = "<group>"; };
+		BBF60E6920FD51050097A98A /* OtherTodayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherTodayTableViewCell.h; sourceTree = "<group>"; };
+		BBF60E6A20FD51050097A98A /* OtherTodayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherTodayTableViewCell.m; sourceTree = "<group>"; };
+		BBF60E7220FD60F50097A98A /* PaceKeeper v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PaceKeeper v3.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,8 @@
 				BB4B982120E618070090C82D /* NotificationTableViewCell.m */,
 				BB9AD1D020F8F1D9008F1914 /* MetaTableViewCell.h */,
 				BB9AD1D120F8F1D9008F1914 /* MetaTableViewCell.m */,
+				BBF60E6920FD51050097A98A /* OtherTodayTableViewCell.h */,
+				BBF60E6A20FD51050097A98A /* OtherTodayTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -435,6 +441,7 @@
 				BB9AD1D220F8F1D9008F1914 /* MetaTableViewCell.m in Sources */,
 				BBECDDFB20D6F78E00458146 /* main.m in Sources */,
 				BBECDE3620D7F61300458146 /* CDManager.m in Sources */,
+				BBF60E6B20FD51050097A98A /* OtherTodayTableViewCell.m in Sources */,
 				BBECDDF320D6F78B00458146 /* PaceKeeper.xcdatamodeld in Sources */,
 				BB26A9A920EC2F090045FBAB /* StoreKitManager.m in Sources */,
 				BBECDE2C20D7F42900458146 /* TodayTableViewController.m in Sources */,
@@ -773,10 +780,11 @@
 		BBECDDF120D6F78B00458146 /* PaceKeeper.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				BBF60E7220FD60F50097A98A /* PaceKeeper v3.xcdatamodel */,
 				BB26A9A020EC0C7A0045FBAB /* PaceKeeper v2.xcdatamodel */,
 				BBECDDF220D6F78B00458146 /* PaceKeeper.xcdatamodel */,
 			);
-			currentVersion = BB26A9A020EC0C7A0045FBAB /* PaceKeeper v2.xcdatamodel */;
+			currentVersion = BBF60E7220FD60F50097A98A /* PaceKeeper v3.xcdatamodel */;
 			path = PaceKeeper.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

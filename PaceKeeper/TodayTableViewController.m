@@ -164,32 +164,49 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(self.exercises.count == 0) {
-        UILabel *empty = [[UILabel alloc] init];
-        [empty setTextAlignment:NSTextAlignmentCenter];
-        [empty setTextColor:[UIColor whiteColor]];
-        [empty setText:@"No workouts today. Tap + to add one!"];
-        [self.tableView setBackgroundView:empty];
-        return 0;
+        return 2;
     }
     
     [self.tableView setBackgroundView:[[UILabel alloc] init]];
-    return self.exercises.count;
+    return self.exercises.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == 0) {
+        OtherTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoCell"];
+        UIImage *shareImage = [[UIImage imageNamed:@"CircleArrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *picImage = [[UIImage imageNamed:@"Picture"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIButton *shareButton = [[UIButton alloc] initWithFrame:cell.shareView.bounds];
+        UIButton *photoButton = [[UIButton alloc] initWithFrame:cell.photoView.bounds];
+        [shareButton addTarget:self action:@selector(circleButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [photoButton addTarget:self action:@selector(pictureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.shareImage setImage:shareImage];
+        [cell.photoImage setImage:picImage];
+        [cell.shareView addSubview:shareButton];
+        [cell.photoView addSubview:photoButton];
+        
+        [cell.shareImage setTintColor:BLUE];
+        [cell.photoImage setTintColor:BLUE];
+        
+        [cell.photoLabel setText:@"Last picture was taken yesterday."];
+        
+        return cell;
+    } else if(indexPath.row == 1 && self.exercises.count == 0) {
+        OtherTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noExerciseCell"];
+        return cell;
+    }
+    
     TodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"exerciseCell" forIndexPath:indexPath];
-    ExerciseObject *exercise = self.exercises[indexPath.row];
+    ExerciseObject *exercise = self.exercises[indexPath.row - 1];
     
     [cell.exerciseLabel setText:[NSString stringWithFormat:@"%d %@", exercise.goal, exercise.name]];
     [cell.progressLabel setText:[NSString stringWithFormat:@"%d Completed", exercise.completed]]; //Maybe completed yesterday?
     
-    UIImage *customImage = [[UIImage imageNamed:@"Custom"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [cell.customImageView setImage:customImage];
-    
     UIButton *checkButton = [[UIButton alloc] initWithFrame:cell.checkBackground.bounds];
     UIButton *customButton = [[UIButton alloc] initWithFrame:cell.customBackground.bounds];
-    [checkButton setTag:indexPath.row];
-    [customButton setTag:indexPath.row];
+    [checkButton setTag:indexPath.row - 1];
+    [customButton setTag:indexPath.row - 1];
     
     [checkButton addTarget:self action:@selector(checkButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [customButton addTarget:self action:@selector(customButtonPressed:) forControlEvents:UIControlEventTouchDown];
@@ -197,14 +214,38 @@
     [cell.checkBackground addSubview:checkButton];
     [cell.customBackground addSubview:customButton];
     
-    if(exercise.completed >= exercise.goal) {
+    if(exercise.completed == exercise.goal) {
         UIImage *checkFilledImage = [[UIImage imageNamed:@"CheckFilled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [cell.checkImageView setImage:checkFilledImage];
         [cell.checkImageView setTintColor:GREEN];
+        
+        UIImage *customImage = [[UIImage imageNamed:@"Custom"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.customImageView setImage:customImage];
+        [cell.customImageView setTintColor:BLUE];
+    } else if(exercise.completed > exercise.goal) {
+        UIImage *checkFilledImage = [[UIImage imageNamed:@"CheckFilled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.checkImageView setImage:checkFilledImage];
+        [cell.checkImageView setTintColor:GREEN];
+        
+        UIImage *customImage = [[UIImage imageNamed:@"CustomFilled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.customImageView setImage:customImage];
+        [cell.customImageView setTintColor:GREEN];
+    } else if(exercise.completed == 0) {
+        UIImage *checkImage = [[UIImage imageNamed:@"Check"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.checkImageView setImage:checkImage];
+        [cell.checkImageView setTintColor:BLUE];
+        
+        UIImage *customImage = [[UIImage imageNamed:@"Custom"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.customImageView setImage:customImage];
+        [cell.customImageView setTintColor:BLUE];
     } else {
          UIImage *checkImage = [[UIImage imageNamed:@"Check"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [cell.checkImageView setImage:checkImage];
         [cell.checkImageView setTintColor:BLUE];
+        
+        UIImage *customImage = [[UIImage imageNamed:@"CustomFilled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cell.customImageView setImage:customImage];
+        [cell.customImageView setTintColor:GREEN];
     }
     
     return cell;
@@ -275,7 +316,7 @@
             
             [self.tableView beginUpdates];
             self.exercises = [[CDManager sharedManager] getTodaysExercises];
-            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
             [self.tableView reloadData];
             [self.tableView endUpdates];
             
@@ -397,6 +438,16 @@
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     
     return ([string isEqualToString:filtered] && newLength <= 59);
+}
+
+#pragma mark - Picture Cell Action
+
+- (void)shareButtonPressed:(id)sender {
+    
+}
+
+- (void)circleButtonPressed:(id)sender {
+    
 }
 
 @end
