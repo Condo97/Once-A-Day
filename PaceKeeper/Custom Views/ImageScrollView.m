@@ -27,6 +27,7 @@
     [super drawRect:rect];
     
     [self.roundedView setFrame:rect];
+    [self.theScrollView setFrame:CGRectMake(CGRectGetMidX(rect) - (67.0 / 2), 0, 67, 67)];
 }
 
 - (void)awakeFromNib {

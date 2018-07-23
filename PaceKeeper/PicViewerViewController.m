@@ -52,18 +52,23 @@
     if(self.imageArray.count != 0)
         [self updateScrollView:0];
     
+    [self.playImage setTintColor:BLUE];
+    [self.speedImage setTintColor:BLUE];
+    [self.downloadImage setTintColor:BLUE];
+    
+    if(self.imageArray.count == 0) {
+        [self.downloadButton setEnabled:NO];
+        [self.shareButtonOutlet setEnabled:NO];
+        [self.speedButton setEnabled:NO];
+
+        [self.downloadImage setTintColor:[UIColor lightGrayColor]];
+        [self.shareButtonOutlet setTintColor:[UIColor lightGrayColor]];
+        [self.speedImage setTintColor:[UIColor lightGrayColor]];
+    }
+    
     if(self.imageArray.count <= 1) {
         [self.playImage setTintColor:[UIColor lightGrayColor]];
-        [self.speedImage setTintColor:[UIColor lightGrayColor]];
-        [self.downloadImage setTintColor:[UIColor lightGrayColor]];
-        
         [self.playButton setEnabled:NO];
-        [self.speedButton setEnabled:NO];
-        [self.downloadButton setEnabled:NO];
-    } else {
-        [self.playImage setTintColor:BLUE];
-        [self.speedImage setTintColor:BLUE];
-        [self.downloadImage setTintColor:BLUE];
     }
     
     [self.imageScrollView.theScrollView setContentSize:CGSizeMake(self.imageArray.count * PREVIEW_SIZE, PREVIEW_SIZE)];

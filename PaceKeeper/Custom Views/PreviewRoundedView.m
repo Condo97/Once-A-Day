@@ -24,6 +24,10 @@
     [super drawRect:rect];
     
     [self.roundedView setFrame:rect];
+    
+    CGRect imageViewFrame = rect;
+    imageViewFrame.size.height = imageViewFrame.size.height + 1;
+    [self.imageView setFrame:imageViewFrame];
 }
 
 - (void)awakeFromNib {

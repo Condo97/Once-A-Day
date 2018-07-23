@@ -32,7 +32,7 @@
     [self loadAndUpdate];
     
     //DEVELOPMENT USE ONLY, MAKE SURE TO COMMENT AGAIN!!!!
-    //[KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
+    [KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
     
     int ra = arc4random_uniform((uint32_t)MOTIVATIONAL_QUOTES.count);
     [self.motivationalQuote setText:MOTIVATIONAL_QUOTES[ra][0]];
