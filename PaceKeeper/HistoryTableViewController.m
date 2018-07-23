@@ -361,7 +361,7 @@
 }
 
 - (void)premiumInfoButtonPressed:(id)sender {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium" message:@"Premium lets you set custom notifications to remind you to exercise! If you've already purchased Premium, select \"Restore\"." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium" message:@"Premium lets you add workout notifications and take daily pictures! More features coming soon! If you've already purchased Premium, select \"Restore\"." preferredStyle:UIAlertControllerStyleAlert];
     [ac addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleCancel handler:nil]];
     [ac addAction:[UIAlertAction actionWithTitle:@"Restore" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[StoreKitManager sharedManager] restorePurchases];

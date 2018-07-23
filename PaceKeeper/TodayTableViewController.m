@@ -41,7 +41,7 @@
     int r = arc4random_uniform(21);
     if(r == 5) {
         if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
-            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium!" message:@"Premium currently adds the ability to add periodic notifications for your exercises, with more features coming soon!" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium!" message:@"Premium lets you add workout notifications and take daily pictures! More features coming soon!" preferredStyle:UIAlertControllerStyleAlert];
             [ac addAction:[UIAlertAction actionWithTitle:@"Not now" style:UIAlertActionStyleCancel handler:nil]];
             [ac addAction:[UIAlertAction actionWithTitle:@"Sure!" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 [[StoreKitManager sharedManager] setDelegate:self];
@@ -117,6 +117,7 @@
     [self.tableView reloadData];
     if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
         [self.navigationController.view addSubview:self.bannerView];
+        
     }
 }
 
@@ -179,12 +180,25 @@
         UIImage *picImage = [[UIImage imageNamed:@"Picture"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIButton *shareButton = [[UIButton alloc] initWithFrame:cell.shareView.bounds];
         UIButton *photoButton = [[UIButton alloc] initWithFrame:cell.photoView.bounds];
-        [shareButton addTarget:self action:@selector(circleButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [photoButton addTarget:self action:@selector(pictureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.shareImage setImage:shareImage];
         [cell.shareView addSubview:shareButton];
         [cell.photoView addSubview:photoButton];
+        
+        if(!((NSNumber *)[KFKeychain loadObjectForKey:PREMIUM_PURCHASED]).boolValue) {
+            [cell.photoImage setImage:picImage];
+            [cell.photoLabel setText:@"Purchase Premium to unlock."];
+            [cell.shareImage setTintColor:BLUE];
+            [cell.photoImage setTintColor:BLUE];
+            
+            [shareButton addTarget:self action:@selector(initiatePremiumPurchase) forControlEvents:UIControlEventTouchUpInside];
+            [photoButton addTarget:self action:@selector(initiatePremiumPurchase) forControlEvents:UIControlEventTouchUpInside];
+            
+            return cell;
+        }
+        
+        [shareButton addTarget:self action:@selector(circleButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [photoButton addTarget:self action:@selector(pictureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.shareImage setTintColor:BLUE];
         
@@ -284,6 +298,17 @@
     }
     
     return cell;
+}
+
+- (void)initiatePremiumPurchase {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Premium!" message:@"Premium lets you add workout notifications and take daily pictures! More features coming soon!" preferredStyle:UIAlertControllerStyleAlert];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Not now" style:UIAlertActionStyleCancel handler:nil]];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Sure!" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [[StoreKitManager sharedManager] setDelegate:self];
+        [[StoreKitManager sharedManager] startPremiumPurchase];
+    }]];
+    
+    [self presentViewController:ac animated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -454,6 +479,8 @@
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Thank you!" message:@"Thank you for your purchase! You now have access to premium features." preferredStyle:UIAlertControllerStyleAlert];
     [ac addAction:[UIAlertAction actionWithTitle:@"Sounds good!" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:ac animated:YES completion:nil];
+    
+    [self.tableView reloadData];
     
 }
 
