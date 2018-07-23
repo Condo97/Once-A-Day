@@ -147,6 +147,7 @@ BOOL const DefaultTransitionShouldAnimate = YES;
                    withCallbackBlock:^(BOOL success) {
                        
                        if (success) {
+                           
                            UISaveVideoAtPathToSavedPhotosAlbum(tempPath, self, nil, nil);
                        }
                        

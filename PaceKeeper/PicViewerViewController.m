@@ -138,7 +138,31 @@
     [self.downloadImage setImage:[[UIImage imageNamed:@"DownloadFilled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [self.activityIndicator startAnimating];
     
-    [self renderVideo];
+    [self renderVideo:^(BOOL success) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+            UIViewController *vc = [[UIViewController alloc] init];
+            [vc.view setBackgroundColor:[UIColor clearColor]];
+            [window setRootViewController:vc];
+            [window setWindowLevel:UIWindowLevelAlert + 1];
+            [window makeKeyAndVisible];
+            
+            if(success) {
+                UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Video Saved" message:@"Your progress video has been successfully saved!" preferredStyle:UIAlertControllerStyleAlert];
+                [ac addAction:[UIAlertAction actionWithTitle:@"Cool!" style:UIAlertActionStyleCancel handler:nil]];
+                [vc presentViewController:ac animated:YES completion:nil];
+            } else {
+                UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Error" message:@"There was an error saving your progress video. Please make sure the app is open until the video is finished saving!" preferredStyle:UIAlertControllerStyleAlert];
+                [ac addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
+                [vc presentViewController:ac animated:YES completion:nil];
+            }
+            
+            [self.downloadButton setEnabled:YES];
+            [self.downloadImage setTintColor:BLUE];
+            [self.downloadImage setImage:[[UIImage imageNamed:@"Download"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+            [self.activityIndicator stopAnimating];
+        });
+    }];
 //    NSMutableArray *uiimageArray = [[NSMutableArray alloc] init];
 //    for(CustomImage *image in self.imageArray) {
 //        [uiimageArray addObject:image.image];
@@ -231,7 +255,49 @@
 }
 
 - (IBAction)shareButton:(id)sender {
-    [self performSegueWithIdentifier:@"toShareView" sender:nil];
+    [self.downloadButton setEnabled:NO];
+    [self.downloadImage setTintColor:[UIColor lightGrayColor]];
+    [self.downloadImage setImage:[[UIImage imageNamed:@"DownloadFilled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    [self.activityIndicator startAnimating];
+    
+    [self renderVideo:^(BOOL success) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.downloadButton setEnabled:YES];
+            [self.downloadImage setTintColor:BLUE];
+            [self.downloadImage setImage:[[UIImage imageNamed:@"Download"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+            [self.activityIndicator stopAnimating];
+            
+            if(success) {
+                UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:
+                                                                                                                                         [NSString stringWithFormat:@"temp.mp4"]]]] applicationActivities:nil];
+                controller.modalPresentationStyle = UIModalPresentationPopover;
+                [self presentViewController:controller animated:YES completion:nil];
+                
+                UIPopoverPresentationController *popController = [controller popoverPresentationController];
+                popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+                popController.barButtonItem = self.navigationItem.leftBarButtonItem;
+                
+                // access the completion handler
+                controller.completionWithItemsHandler = ^(NSString *activityType,
+                                                          BOOL completed,
+                                                          NSArray *returnedItems,
+                                                          NSError *error){
+                    // react to the completion
+                    if (completed) {
+                        // user shared an item
+                    } else {
+                        // user cancelled
+                    }
+                    
+                    if (error) {
+                        NSLog(@"An Error occured: %@, %@", error.localizedDescription, error.localizedFailureReason);
+                    }
+                };
+            }
+        });
+    }];
+    
+    //[self performSegueWithIdentifier:@"toShareView" sender:nil];
 }
 
 - (UIImage *)rotate:(UIImage*)src andOrientation:(UIImageOrientation)orientation {
@@ -299,9 +365,7 @@
 //}
 
 //
-- (void)renderVideo {
-    [self.activityIndicator startAnimating];
-
+- (void)renderVideo:(void (^)(BOOL success))completion {
     NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/renderedVideo.mp4"];
     [[NSFileManager defaultManager] removeItemAtPath:savePath error:nil];
     NSMutableArray *uiimageArray = [[NSMutableArray alloc] init];
@@ -310,30 +374,8 @@
     }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [HJImagesToVideo saveVideoToPhotosWithImages:uiimageArray withFPS:(int)(1.0 / FRAME_LENGTH) animateTransitions:NO withCallbackBlock:^(BOOL success) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-                UIViewController *vc = [[UIViewController alloc] init];
-                [vc.view setBackgroundColor:[UIColor clearColor]];
-                [window setRootViewController:vc];
-                [window setWindowLevel:UIWindowLevelAlert + 1];
-                [window makeKeyAndVisible];
-
-                if(success) {
-                    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Video Saved" message:@"Your progress video has been successfully saved!" preferredStyle:UIAlertControllerStyleAlert];
-                    [ac addAction:[UIAlertAction actionWithTitle:@"Cool!" style:UIAlertActionStyleCancel handler:nil]];
-                    [vc presentViewController:ac animated:YES completion:nil];
-                } else {
-                    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Error" message:@"There was an error saving your progress video. Please make sure the app is open until the video is finished saving!" preferredStyle:UIAlertControllerStyleAlert];
-                    [ac addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
-                    [vc presentViewController:ac animated:YES completion:nil];
-                }
-
-                [self.downloadButton setEnabled:YES];
-                [self.downloadImage setTintColor:BLUE];
-                [self.downloadImage setImage:[[UIImage imageNamed:@"Download"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-                [self.activityIndicator stopAnimating];
-            });
+        [HJImagesToVideo saveVideoToPhotosWithImages:uiimageArray withFPS:(int)(1.0 / FRAME_LENGTH) animateTransitions:YES withCallbackBlock:^(BOOL success) {
+            completion(success);
         }];
     });
 }
@@ -364,7 +406,6 @@
             UIImage *image = [imgArray objectAtIndex:i];
             image = [self rotate:image andOrientation:UIImageOrientationUp];
             //CGImageRef *imageRef = image.CGImage;
-            
             
             CGImageDestinationAddImage(destination, image.CGImage, (__bridge CFDictionaryRef)frameProperties);
         }
