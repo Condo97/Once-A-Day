@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
-#import "ExerciseObject.h"
+#import "Defines.pch"
 
 @interface CDManager : NSObject
 
@@ -31,5 +31,10 @@
 - (BOOL)nameExists:(NSString *)name;
 - (void)updateNotificationsEnabled:(ExerciseObject *)exercise enabled:(BOOL)enabled;
 - (void)updateNotificationHour:(ExerciseObject *)exercise hour:(int)hour;
+- (void)saveImage:(CustomImage *)image;
+- (NSArray<CustomImage *> *)getAllImages;
+- (NSArray<UIImage *> *)getAllImagesWithoutDate;
+- (BOOL)imageExistsToday;
+- (NSDate *)getLastPictureDate;
 
 @end

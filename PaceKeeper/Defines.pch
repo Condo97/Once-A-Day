@@ -10,9 +10,13 @@
 #define Defines_pch
 
 #import "ExerciseObject.h"
+#import "CustomImage.h"
 #import "CDManager.h"
 #import "KFKeychain.h"
 #import "SecretDefines.pch"
+#import "RoundedView.h"
+#import "ImageScrollView.h"
+#import "PreviewRoundedView.h"
 
 @import GoogleMobileAds;
 

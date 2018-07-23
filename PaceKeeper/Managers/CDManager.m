@@ -405,8 +405,87 @@
     [context save:&error2];
 }
 
-- (void)saveImage:(UIImage *)image date:(NSDate *)date {
+- (void)saveImage:(CustomImage *)image {
+    NSManagedObjectContext *context = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).persistentContainer.viewContext;
+    NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:context];
+    NSData *imageData = UIImageJPEGRepresentation(image.image, 1.0);
     
+    [managedObject setValue:imageData forKey:@"image"];
+    [managedObject setValue:image.date forKey:@"date"];
+    
+    NSError *error;
+    [context save:&error];
+}
+
+- (NSArray<CustomImage *> *)getAllImages {
+    NSMutableArray<CustomImage *> *imageArray = [[NSMutableArray alloc] init];
+    NSManagedObjectContext *context = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).persistentContainer.viewContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Album"];
+    NSError *error;
+    NSArray *resultArray = [context executeFetchRequest:request error:&error];
+    
+    for(NSManagedObject *obj in resultArray) {
+        UIImage *originalImage = [UIImage imageWithData:[obj valueForKey:@"image"]];
+        CustomImage *image = [[CustomImage alloc] initWithImage:originalImage date:[obj valueForKey:@"date"]];
+        
+        [imageArray addObject:image];
+    }
+    
+    return imageArray;
+}
+
+- (NSArray<UIImage *> *)getAllImagesWithoutDate {
+    NSMutableArray<UIImage *> *imageArray = [[NSMutableArray alloc] init];
+    NSManagedObjectContext *context = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).persistentContainer.viewContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Album"];
+    NSError *error;
+    NSArray *resultArray = [context executeFetchRequest:request error:&error];
+    
+    for(NSManagedObject *obj in resultArray) {
+        UIImage *image = [UIImage imageWithData:[obj valueForKey:@"image"]];
+        [imageArray addObject:image];
+    }
+    
+    return imageArray;
+}
+
+- (BOOL)imageExistsToday {
+    NSManagedObjectContext *context = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).persistentContainer.viewContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Album"];
+    NSError *error;
+    NSArray *resultArray = [context executeFetchRequest:request error:&error];
+    
+    for(NSManagedObject *obj in resultArray) {
+        NSDate *fromDate;
+        NSDate *toDate;
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        
+        [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                     interval:NULL forDate:[obj valueForKey:@"Date"]];
+        [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                     interval:NULL forDate:[NSDate date]];
+        
+        NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                                   fromDate:fromDate toDate:toDate options:0];
+        
+        if(difference.day == 0)
+            return YES;
+    }
+    
+    return NO;
+}
+
+- (NSDate *)getLastPictureDate {
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+    NSArray<CustomImage *> *images = [[self getAllImages] sortedArrayUsingDescriptors:@[descriptor]];
+    
+    if(images.count > 0)
+        return images[images.count - 1].date;
+    return [NSDate dateWithTimeIntervalSince1970:0];
 }
 
 @end

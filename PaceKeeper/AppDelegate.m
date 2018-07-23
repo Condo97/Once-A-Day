@@ -22,7 +22,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     [GADMobileAds configureWithApplicationID:@"ca-app-pub-0561860165633355~4435620993"];
     
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];

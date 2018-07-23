@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Once A Day accesses your photo library to save your progress GIF.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Once A Day accesses your photo library to save your progress GIF.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Once A Day uses the camera so you can take daily picutres and record your progress! Photos are not shared with us.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

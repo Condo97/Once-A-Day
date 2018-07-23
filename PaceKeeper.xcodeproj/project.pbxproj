@@ -16,6 +16,10 @@
 		BB4B981C20E6166E0090C82D /* KFKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981A20E6166E0090C82D /* KFKeychain.m */; };
 		BB4B981F20E616870090C82D /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B981E20E616870090C82D /* NetworkManager.m */; };
 		BB4B982220E618070090C82D /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4B982120E618070090C82D /* NotificationTableViewCell.m */; };
+		BB5565CD20FE5E6F009E703A /* PicViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5565CC20FE5E6F009E703A /* PicViewerViewController.m */; };
+		BB5565D020FE6AEB009E703A /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5565CF20FE6AEB009E703A /* ImageScrollView.m */; };
+		BB5565D320FE9A6D009E703A /* PreviewRoundedView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5565D220FE9A6D009E703A /* PreviewRoundedView.m */; };
+		BB5565DA21029447009E703A /* HJImagesToVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5565D821029446009E703A /* HJImagesToVideo.m */; };
 		BB9AD1D220F8F1D9008F1914 /* MetaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9AD1D120F8F1D9008F1914 /* MetaTableViewCell.m */; };
 		BBECDDEA20D6F78B00458146 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDDE920D6F78B00458146 /* AppDelegate.m */; };
 		BBECDDF020D6F78B00458146 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBECDDEE20D6F78B00458146 /* Main.storyboard */; };
@@ -35,6 +39,8 @@
 		BBECDE3C20D8398000458146 /* AddExercise.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBECDE3B20D8398000458146 /* AddExercise.xib */; };
 		BBECDE3F20D8E1E400458146 /* AddExerciseView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBECDE3E20D8E1E400458146 /* AddExerciseView.m */; };
 		BBF60E6B20FD51050097A98A /* OtherTodayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF60E6A20FD51050097A98A /* OtherTodayTableViewCell.m */; };
+		BBF60E7520FD62D40097A98A /* CustomImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF60E7420FD62D40097A98A /* CustomImage.m */; };
+		BBF60E7820FD68FE0097A98A /* TakePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF60E7720FD68FE0097A98A /* TakePictureViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +80,14 @@
 		BB4B981E20E616870090C82D /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		BB4B982020E618070090C82D /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		BB4B982120E618070090C82D /* NotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
+		BB5565CB20FE5E6F009E703A /* PicViewerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicViewerViewController.h; sourceTree = "<group>"; };
+		BB5565CC20FE5E6F009E703A /* PicViewerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicViewerViewController.m; sourceTree = "<group>"; };
+		BB5565CE20FE6AEB009E703A /* ImageScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageScrollView.h; sourceTree = "<group>"; };
+		BB5565CF20FE6AEB009E703A /* ImageScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageScrollView.m; sourceTree = "<group>"; };
+		BB5565D120FE9A6D009E703A /* PreviewRoundedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreviewRoundedView.h; sourceTree = "<group>"; };
+		BB5565D220FE9A6D009E703A /* PreviewRoundedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewRoundedView.m; sourceTree = "<group>"; };
+		BB5565D821029446009E703A /* HJImagesToVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJImagesToVideo.m; sourceTree = "<group>"; };
+		BB5565D921029447009E703A /* HJImagesToVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJImagesToVideo.h; sourceTree = "<group>"; };
 		BB790D7920D8F88900890E60 /* Defines.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.pch; sourceTree = "<group>"; };
 		BB9AD1D020F8F1D9008F1914 /* MetaTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetaTableViewCell.h; sourceTree = "<group>"; };
 		BB9AD1D120F8F1D9008F1914 /* MetaTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetaTableViewCell.m; sourceTree = "<group>"; };
@@ -113,6 +127,10 @@
 		BBF60E6920FD51050097A98A /* OtherTodayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherTodayTableViewCell.h; sourceTree = "<group>"; };
 		BBF60E6A20FD51050097A98A /* OtherTodayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherTodayTableViewCell.m; sourceTree = "<group>"; };
 		BBF60E7220FD60F50097A98A /* PaceKeeper v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PaceKeeper v3.xcdatamodel"; sourceTree = "<group>"; };
+		BBF60E7320FD62D40097A98A /* CustomImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomImage.h; sourceTree = "<group>"; };
+		BBF60E7420FD62D40097A98A /* CustomImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomImage.m; sourceTree = "<group>"; };
+		BBF60E7620FD68FE0097A98A /* TakePictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakePictureViewController.h; sourceTree = "<group>"; };
+		BBF60E7720FD68FE0097A98A /* TakePictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakePictureViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +196,15 @@
 			path = KFKeychain;
 			sourceTree = "<group>";
 		};
+		BB5565DB21029452009E703A /* HJImagesToVideo */ = {
+			isa = PBXGroup;
+			children = (
+				BB5565D921029447009E703A /* HJImagesToVideo.h */,
+				BB5565D821029446009E703A /* HJImagesToVideo.m */,
+			);
+			path = HJImagesToVideo;
+			sourceTree = "<group>";
+		};
 		BBECDDDC20D6F78B00458146 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +229,7 @@
 		BBECDDE720D6F78B00458146 /* PaceKeeper */ = {
 			isa = PBXGroup;
 			children = (
+				BB5565DB21029452009E703A /* HJImagesToVideo */,
 				BB4B981920E6166E0090C82D /* KFKeychain */,
 				BBC167B520E40342006482B8 /* PaceKeeper.entitlements */,
 				BBECDDE820D6F78B00458146 /* AppDelegate.h */,
@@ -212,6 +240,10 @@
 				BB0EAF6820DA45FD003040BC /* ScheduleTableViewController.m */,
 				BB1A7EB820DA7DF600843458 /* HistoryTableViewController.h */,
 				BB1A7EB920DA7DF600843458 /* HistoryTableViewController.m */,
+				BBF60E7620FD68FE0097A98A /* TakePictureViewController.h */,
+				BBF60E7720FD68FE0097A98A /* TakePictureViewController.m */,
+				BB5565CB20FE5E6F009E703A /* PicViewerViewController.h */,
+				BB5565CC20FE5E6F009E703A /* PicViewerViewController.m */,
 				BB0EAF6A20DA460F003040BC /* Cells */,
 				BBECDE3A20D7F76F00458146 /* Custom Objects */,
 				BBECDE3020D7F61300458146 /* Managers */,
@@ -258,6 +290,10 @@
 				BBECDE2020D7984800458146 /* RoundedButton.m */,
 				BBECDE3D20D8E1E400458146 /* AddExerciseView.h */,
 				BBECDE3E20D8E1E400458146 /* AddExerciseView.m */,
+				BB5565CE20FE6AEB009E703A /* ImageScrollView.h */,
+				BB5565CF20FE6AEB009E703A /* ImageScrollView.m */,
+				BB5565D120FE9A6D009E703A /* PreviewRoundedView.h */,
+				BB5565D220FE9A6D009E703A /* PreviewRoundedView.m */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -280,6 +316,8 @@
 			children = (
 				BBECDE3720D7F76900458146 /* ExerciseObject.h */,
 				BBECDE3820D7F76900458146 /* ExerciseObject.m */,
+				BBF60E7320FD62D40097A98A /* CustomImage.h */,
+				BBF60E7420FD62D40097A98A /* CustomImage.m */,
 			);
 			path = "Custom Objects";
 			sourceTree = "<group>";
@@ -435,22 +473,28 @@
 				BBECDE3920D7F76900458146 /* ExerciseObject.m in Sources */,
 				BB4B982220E618070090C82D /* NotificationTableViewCell.m in Sources */,
 				BBECDE2F20D7F45100458146 /* TodayTableViewCell.m in Sources */,
+				BBF60E7820FD68FE0097A98A /* TakePictureViewController.m in Sources */,
 				BB1A7EBA20DA7DF600843458 /* HistoryTableViewController.m in Sources */,
 				BBECDDEA20D6F78B00458146 /* AppDelegate.m in Sources */,
+				BB5565CD20FE5E6F009E703A /* PicViewerViewController.m in Sources */,
 				BBECDE2820D7984800458146 /* RoundedView.m in Sources */,
+				BB5565D020FE6AEB009E703A /* ImageScrollView.m in Sources */,
 				BB9AD1D220F8F1D9008F1914 /* MetaTableViewCell.m in Sources */,
 				BBECDDFB20D6F78E00458146 /* main.m in Sources */,
 				BBECDE3620D7F61300458146 /* CDManager.m in Sources */,
 				BBF60E6B20FD51050097A98A /* OtherTodayTableViewCell.m in Sources */,
+				BBF60E7520FD62D40097A98A /* CustomImage.m in Sources */,
 				BBECDDF320D6F78B00458146 /* PaceKeeper.xcdatamodeld in Sources */,
 				BB26A9A920EC2F090045FBAB /* StoreKitManager.m in Sources */,
 				BBECDE2C20D7F42900458146 /* TodayTableViewController.m in Sources */,
 				BB0EAF6D20DA461F003040BC /* ScheduleTableViewCell.m in Sources */,
 				BB0EAF6920DA45FD003040BC /* ScheduleTableViewController.m in Sources */,
+				BB5565DA21029447009E703A /* HJImagesToVideo.m in Sources */,
 				BBECDE2720D7984800458146 /* RoundedButton.m in Sources */,
 				BBECDE2920D7984800458146 /* RoundedTextField.m in Sources */,
 				BB4B981C20E6166E0090C82D /* KFKeychain.m in Sources */,
 				BBECDE3F20D8E1E400458146 /* AddExerciseView.m in Sources */,
+				BB5565D320FE9A6D009E703A /* PreviewRoundedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

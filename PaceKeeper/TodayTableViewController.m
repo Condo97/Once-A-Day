@@ -174,6 +174,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row == 0) {
         OtherTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photoCell"];
+        NSDate *lastPictureDate = [[CDManager sharedManager] getLastPictureDate];
         UIImage *shareImage = [[UIImage imageNamed:@"CircleArrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *picImage = [[UIImage imageNamed:@"Picture"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIButton *shareButton = [[UIButton alloc] initWithFrame:cell.shareView.bounds];
@@ -182,14 +183,48 @@
         [photoButton addTarget:self action:@selector(pictureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.shareImage setImage:shareImage];
-        [cell.photoImage setImage:picImage];
         [cell.shareView addSubview:shareButton];
         [cell.photoView addSubview:photoButton];
         
         [cell.shareImage setTintColor:BLUE];
-        [cell.photoImage setTintColor:BLUE];
         
-        [cell.photoLabel setText:@"Last picture was taken yesterday."];
+        if([[CDManager sharedManager] imageExistsToday]) {
+            [cell.photoImage setImage:[[UIImage imageNamed:@"PictureFilled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+            [cell.photoImage setTintColor:GREEN];
+        } else {
+            [cell.photoImage setImage:picImage];
+            [cell.photoImage setTintColor:BLUE];
+        }
+        
+        NSDate *fromDate;
+        NSDate *toDate;
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        
+        [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                     interval:NULL forDate:lastPictureDate];
+        [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                     interval:NULL forDate:[NSDate date]];
+        
+        NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                                   fromDate:fromDate toDate:toDate options:0];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateStyle:NSDateFormatterShortStyle];
+        [df setTimeStyle:NSDateFormatterNoStyle];
+        NSString *formattedString = [df stringFromDate:lastPictureDate];
+        
+        if(difference.day == 0)
+            formattedString = @"today";
+        else if(difference.day == 1)
+            formattedString = @"yesterday";
+        else if(difference.day < 7)
+            formattedString = [NSString stringWithFormat:@"%ld days ago", (long)difference.day];
+        
+        
+        if([lastPictureDate isEqualToDate:[NSDate dateWithTimeIntervalSince1970:0]])
+            [cell.photoLabel setText:[NSString stringWithFormat:@"You haven't taken a picture yet!"]];
+        else
+            [cell.photoLabel setText:[NSString stringWithFormat:@"Last picture was taken %@.", formattedString]];
         
         return cell;
     } else if(indexPath.row == 1 && self.exercises.count == 0) {
@@ -442,12 +477,42 @@
 
 #pragma mark - Picture Cell Action
 
-- (void)shareButtonPressed:(id)sender {
-    
+- (void)pictureButtonPressed:(id)sender {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Daily Picture" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        [picker setDelegate:self];
+        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [picker setShowsCameraControls:YES];
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Select Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        [picker setDelegate:self];
+        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [ac addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:ac animated:YES completion:nil];
 }
 
 - (void)circleButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"toPicViewer" sender:nil];//toPicViewer
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    CustomImage *ci = [[CustomImage alloc] initWithImage:image date:[NSDate date]];
+    [[CDManager sharedManager] saveImage:ci];
     
+    OtherTodayTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView reloadData];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Defines.pch"
 
 @interface NetworkManager : NSObject
 

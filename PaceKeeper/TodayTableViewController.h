@@ -10,7 +10,7 @@
 #import "StoreKitManager.h"
 #import "OtherTodayTableViewCell.h"
 
-@interface TodayTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
+@interface TodayTableViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *motivationalQuote;
 @property (weak, nonatomic) IBOutlet UILabel *motivationalAuthor;
