@@ -32,7 +32,7 @@
     [self loadAndUpdate];
     
     //DEVELOPMENT USE ONLY, MAKE SURE TO COMMENT AGAIN!!!!
-    [KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
+    //[KFKeychain saveObject:[NSNumber numberWithBool:YES] forKey:PREMIUM_PURCHASED];
     
     int ra = arc4random_uniform((uint32_t)MOTIVATIONAL_QUOTES.count);
     [self.motivationalQuote setText:MOTIVATIONAL_QUOTES[ra][0]];
@@ -505,22 +505,37 @@
 #pragma mark - Picture Cell Action
 
 - (void)pictureButtonPressed:(id)sender {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Daily Picture" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    [ac addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [picker setShowsCameraControls:YES];
-        [self presentViewController:picker animated:YES completion:nil];
-    }]];
-    [ac addAction:[UIAlertAction actionWithTitle:@"Select Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [self presentViewController:picker animated:YES completion:nil];
-    }]];
-    [ac addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:ac animated:YES completion:nil];
+    BOOL authorized = YES;
+    AVAuthorizationStatus *status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if(status == AVAuthorizationStatusDenied)
+        authorized = NO;
+    
+    PHAuthorizationStatus *status2 = [PHPhotoLibrary authorizationStatus];
+    if(status2 == PHAuthorizationStatusDenied)
+        authorized = NO;
+    
+    if(authorized == NO) {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please allow Once A Day to access your photo library and camera." preferredStyle:UIAlertControllerStyleAlert];
+        [ac addAction:[UIAlertAction actionWithTitle:@"Sounds Good" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:ac animated:YES completion:nil];
+    } else {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Daily Picture" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [ac addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            [picker setDelegate:self];
+            [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+            [picker setShowsCameraControls:YES];
+            [self presentViewController:picker animated:YES completion:nil];
+        }]];
+        [ac addAction:[UIAlertAction actionWithTitle:@"Select Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            [picker setDelegate:self];
+            [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            [self presentViewController:picker animated:YES completion:nil];
+        }]];
+        [ac addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:ac animated:YES completion:nil];
+    }
 }
 
 - (void)circleButtonPressed:(id)sender {

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
 #import "StoreKitManager.h"
 #import "OtherTodayTableViewCell.h"
 
