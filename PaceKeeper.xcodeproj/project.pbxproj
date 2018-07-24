@@ -71,9 +71,9 @@
 		BB26A9A220EC28640045FBAB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BB26A9A720EC2F090045FBAB /* StoreKitManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreKitManager.h; sourceTree = "<group>"; };
 		BB26A9A820EC2F090045FBAB /* StoreKitManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreKitManager.m; sourceTree = "<group>"; };
-		BB26A9AA20EC2F880045FBAB /* SecretDefines.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecretDefines.pch; sourceTree = "<group>"; };
 		BB26A9AB20EEFD2F0045FBAB /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../Downloads/GoogleMobileAdsSdkiOS-7.31.0/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		BB26A9AD20EEFD770045FBAB /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		BB43726C2106AF3700177EBB /* SecretDefines2.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecretDefines2.pch; sourceTree = "<group>"; };
 		BB4B981A20E6166E0090C82D /* KFKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFKeychain.m; sourceTree = "<group>"; };
 		BB4B981B20E6166E0090C82D /* KFKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFKeychain.h; sourceTree = "<group>"; };
 		BB4B981D20E616870090C82D /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 				BBECDDF920D6F78E00458146 /* Info.plist */,
 				BBECDDFA20D6F78E00458146 /* main.m */,
 				BB790D7920D8F88900890E60 /* Defines.pch */,
-				BB26A9AA20EC2F880045FBAB /* SecretDefines.pch */,
+				BB43726C2106AF3700177EBB /* SecretDefines2.pch */,
 				BBECDDF120D6F78B00458146 /* PaceKeeper.xcdatamodeld */,
 			);
 			path = PaceKeeper;

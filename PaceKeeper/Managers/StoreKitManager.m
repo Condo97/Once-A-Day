@@ -7,7 +7,7 @@
 //
 
 #import "StoreKitManager.h"
-#import "SecretDefines.pch"
+#import "SecretDefines2.pch"
 #import "KFKeychain.h"
 
 @implementation StoreKitManager

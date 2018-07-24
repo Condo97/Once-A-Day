@@ -13,7 +13,7 @@
 #import "CustomImage.h"
 #import "CDManager.h"
 #import "KFKeychain.h"
-#import "SecretDefines.pch"
+#import "SecretDefines2.pch"
 #import "RoundedView.h"
 #import "ImageScrollView.h"
 #import "PreviewRoundedView.h"
